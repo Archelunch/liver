@@ -20,6 +20,7 @@ class MCQQuestion(Question):
 
     def check_if_correct(self, guess):
         answer = Answer.objects.get(id=guess)
+        answer.add_people()
 
         if answer.correct is True:
             return True
@@ -61,6 +62,11 @@ class Answer(models.Model):
                                   default=False,
                                   help_text="Is this a correct answer?",
                                   verbose_name="Correct")
+    people_count = models.IntegerField(verbose_name="How many people choosed this answer", default=0)
+
+    def add_people(self):
+        self.people_count+=1
+        self.save()
 
     def __str__(self):
         return self.content

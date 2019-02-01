@@ -53,6 +53,10 @@ class Quiz(models.Model):
         verbose_name=_("Description"),
         blank=True, help_text=_("a description of the quiz"))
 
+    user_code = models.TextField(verbose_name=_("user code"), blank=True)
+
+    master_code = models.TextField(verbose_name=_("Master code"), blank=True)
+
     url = models.SlugField(
         max_length=60, blank=False,
         help_text=_("a user friendly url"),
@@ -80,14 +84,14 @@ class Quiz(models.Model):
         verbose_name=_("Answers at end"))
 
     exam_paper = models.BooleanField(
-        blank=False, default=False,
+        default=True,
         help_text=_("If yes, the result of each"
                     " attempt by a user will be"
                     " stored. Necessary for marking."),
         verbose_name=_("Exam Paper"))
 
     single_attempt = models.BooleanField(
-        blank=False, default=False,
+        default=False,
         help_text=_("If yes, only one attempt by"
                     " a user will be permitted."
                     " Non users cannot sit this exam."),
@@ -114,6 +118,9 @@ class Quiz(models.Model):
                     " in the quiz list and can only be"
                     " taken by users who can edit"
                     " quizzes."))
+
+
+    is_started = models.BooleanField(default=False, verbose_name=_("Quiz status"))
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.url = re.sub('\s+', '-', self.url).lower()
@@ -151,6 +158,152 @@ class Quiz(models.Model):
 
     def anon_q_data(self):
         return str(self.id) + "_data"
+
+
+class QUser(models.Model):
+    nickname = models.TextField(verbose_name=_("User's nickname"))
+    quiz = models.ForeignKey(Quiz, verbose_name=_("Quiz"), on_delete=models.CASCADE)
+    score = models.IntegerField(verbose_name=_("User's score"), default=0)
+    incorrect_questions = models.CharField(validators=[validate_comma_separated_integer_list],
+        max_length=1024, blank=True, verbose_name=_("Incorrect questions"))
+    user_answers = models.TextField(blank=True, default='{}',
+                                    verbose_name=_("User Answers"))
+
+    @property
+    def get_score(self):
+        return self.score
+
+    
+    def add_to_score(self, points):
+        self.score += int(points)
+        self.save()
+
+    def add_incorrect_question(self, question):
+        """
+        Adds uid of incorrect question to the list.
+        The question object must be passed in.
+        """
+        if len(self.incorrect_questions) > 0:
+            self.incorrect_questions += ','
+        self.incorrect_questions += str(question.id) + ","
+        self.save()
+
+    @property
+    def get_incorrect_questions(self):
+        """
+        Returns a list of non empty integers, representing the pk of
+        questions
+        """
+        return [int(q) for q in self.incorrect_questions.split(',') if q]
+
+
+    def add_user_answer(self, question, guess):
+        current = json.loads(self.user_answers)
+        current[question.id] = guess
+        self.user_answers = json.dumps(current)
+        self.save()
+
+
+class QuizProgressManager(models.Manager):
+
+    def new_sitting(self, quiz):
+        if quiz.random_order is True:
+            question_set = quiz.question_set.all() \
+                                            .select_subclasses() \
+                                            .order_by('?')
+        else:
+            question_set = quiz.question_set.all() \
+                                            .select_subclasses()
+
+        question_set = [item.id for item in question_set]
+
+        if len(question_set) == 0:
+            raise ImproperlyConfigured('Question set of the quiz is empty. '
+                                       'Please configure questions properly')
+
+        if quiz.max_questions and quiz.max_questions < len(question_set):
+            question_set = question_set[:quiz.max_questions]
+
+        questions = ",".join(map(str, question_set)) + ","
+
+        new_sitting = self.create(quiz=quiz,
+                                  question_order=questions,
+                                  question_list=questions,
+                                  complete=False)
+        return new_sitting
+
+    def quiz_sitting(self, quiz):
+        if quiz.single_attempt is True and self.filter(quiz=quiz,
+                                                       complete=True)\
+                                               .exists():
+            return False
+
+        try:
+            sitting = self.get(quiz=quiz, complete=False)
+        except Sitting.DoesNotExist:
+            sitting = self.new_sitting(quiz)
+        except Sitting.MultipleObjectsReturned:
+            sitting = self.filter(quiz=quiz, complete=False)[0]
+        return sitting
+
+
+class QuizProgress(models.Model):
+    quiz = models.ForeignKey(Quiz, verbose_name=_("Quiz"), on_delete=models.CASCADE)
+    question_order = models.CharField(validators=[validate_comma_separated_integer_list],
+        max_length=1024, verbose_name=_("Question Order"))
+
+    question_list = models.CharField(validators=[validate_comma_separated_integer_list],
+        max_length=1024, verbose_name=_("Question List"))
+
+    complete = models.BooleanField(default=False, blank=False,
+                                   verbose_name=_("Complete"))
+
+    start = models.DateTimeField(auto_now_add=True,
+                                 verbose_name=_("Start"))
+
+    end = models.DateTimeField(null=True, blank=True, verbose_name=_("End"))
+
+    objects = QuizProgressManager()
+    
+    def get_first_question(self):
+        """
+        Returns the next question.
+        If no question is found, returns False
+        Does NOT remove the question from the front of the list.
+        """
+        if not self.question_list:
+            return False
+
+        first, _ = self.question_list.split(',', 1)
+        question_id = int(first)
+        return Question.objects.get_subclass(id=question_id)
+
+    def remove_first_question(self):
+        if not self.question_list:
+            return
+
+        _, others = self.question_list.split(',', 1)
+        self.question_list = others
+        self.save()
+
+
+    def mark_quiz_complete(self):
+        self.complete = True
+        self.end = now()
+        self.save()
+    
+
+    def _question_ids(self):
+        return [int(n) for n in self.question_order.split(',') if n]
+
+
+    def get_questions(self, with_answers=False):
+        question_ids = self._question_ids()
+        questions = sorted(
+            self.quiz.question_set.filter(id__in=question_ids)
+                                  .select_subclasses(),
+            key=lambda q: question_ids.index(q.id))
+        return questions
 
 
 # progress manager
@@ -542,6 +695,8 @@ class Question(models.Model):
                                                "after the question has "
                                                "been answered."),
                                    verbose_name=_('Explanation'))
+                                   
+    is_passed = models.BooleanField(default=False, verbose_name=_("Question status"))
 
     objects = InheritanceManager()
 

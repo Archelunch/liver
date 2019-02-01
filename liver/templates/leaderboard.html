@@ -1,0 +1,15 @@
+<h2 class="header">Рейтинг</h2>
+<div class="center" id="main">
+	<div class="row">
+		<div class="position">№</div>
+		<div class="name">Никнейм</div>
+		<div class="score">Счет</div>
+	</div>
+	{% for user in users %}
+	<div class="row {% if user['winner'] %}top{% elif user['this'] %}user{% endif %}">
+		<div class="position">{{ user.position }}</div>
+		<div class="name">{{ user.name }}</div>
+		<div class="score">{{ user.score }}</div>
+	</div>
+	{% endfor %}
+</div>

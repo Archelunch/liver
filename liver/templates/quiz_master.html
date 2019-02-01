@@ -1,0 +1,46 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Game Manager Room</title>
+</head>
+<body>
+    <input id="game-start-button" type="button" value="Start"/>
+    <input id="question" type="button" value="question"/>
+    <input id="question-results" type="button" value="results"/>
+    <input id="user_score" type="button" value="show score"/>
+</body>
+<script>
+    var roomName = {{ quiz_url_json }};
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/quiz/' + roomName + '/');
+
+    chatSocket.onclose = function(e) {
+        console.error('Game socket closed unexpectedly');
+    };
+
+    document.querySelector('#game-start-button').onclick = function(e) {
+        chatSocket.send(JSON.stringify({
+            'message': 'start'
+        }));
+    };
+    document.querySelector('#question').onclick = function(e) {
+        chatSocket.send(JSON.stringify({
+            'message': 'question'
+        }));
+    };
+    document.querySelector('#question-results').onclick = function(e) {
+        chatSocket.send(JSON.stringify({
+            'message': 'question_results'
+        }));
+    };
+    document.querySelector('#user_score').onclick = function(e) {
+        chatSocket.send(JSON.stringify({
+            'message': 'results'
+        }));
+    };
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Game Room</title>
+</head>
+<body>
+    <form action="" method="post">
+            {% csrf_token %}
+            <p><label for="username_id">Name</label>
+                <input id="username_id" type="text" name="username_id" maxlength="100" required></p>
+   <input id="game-start_btn" type="submit" value="{{quiz_object.title}}" disabled/>
+</form>
+</body>
+<script>
+            var status_start = "{{quiz_object.is_started}}";
+    if(status_start === "True"){
+            document.getElementById("game-start_btn").disabled = false;
+    }
+    var roomName = {{ quiz_url_json }};
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/quiz/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        if(message=="start"){
+            document.getElementById("game-start_btn").disabled = false;
+        }
+        else{
+            console.log("nya");
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Game socket closed unexpectedly');
+    };
+</script>
+</html>

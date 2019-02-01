@@ -26,7 +26,7 @@ class QuizAdminForm(forms.ModelForm):
 
     class Meta:
         model = Quiz
-        exclude = []
+        exclude = ["random_order", 'max_questions', 'pass_mark', 'success_text', 'fail_text', 'single_attempt', 'exam_paper', 'single_attempt']
 
     questions = forms.ModelMultipleChoiceField(
         queryset=Question.objects.all().select_subclasses(),
@@ -85,5 +85,5 @@ class ProgressAdmin(admin.ModelAdmin):
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(MCQQuestion, MCQuestionAdmin)
-admin.site.register(Progress, ProgressAdmin)
-admin.site.register(CSVUpload, CSVUploadsAdmin)
+# admin.site.register(Progress, ProgressAdmin)
+# admin.site.register(CSVUpload, CSVUploadsAdmin)
