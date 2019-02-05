@@ -25,6 +25,10 @@
 		
 			function sendAnswer(ind, question_id) {
 				chatSocket.send(JSON.stringify({message: "answer", name: name, answer: ind, question_id: question_id}));
+				let elems = document.getElementsByClassName("answer");
+				[...elems].forEach((elem) => {
+					elem.disabled = true;
+				});
 			}
 		
 			function processResults() {
@@ -46,21 +50,22 @@
 					newHTML = `
 						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
 						<h2 class="header">${data.questionText}</h2>
-						<div class="stabilizer"><div class="center" id="main">`;
+						<div class="stab"><div class="bottom" id="main">`;
 					data.answers.forEach((answer, index) => {
-						newHTML += `<button class="btn btn1" onclick="sendAnswer(${data.ids[index]}, ${data.question_id})">${answer}</button>`;
+						newHTML += `<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer(${data.ids[index]}, ${data.question_id})">${answer}</button>`;
 					});
 					newHTML += "</div></div>";
 					document.body.innerHTML = newHTML;
 				} else if (data.message === 'question_results') {
-					let stabilizer = document.getElementsByClassName('stabilizer')[0];
-					newHTML = ``;
+					let stabilizer = document.getElementsByClassName('stab')[0];
+					newHTML = `<div class="bottom" id="main">`;
 					data.results.forEach((answer) => {
 						newHTML += `<div class="btn result-bar-outer">
 							<div class="result-bar-inner-${answer.right ? 1 : 2}" style="width: ${answer.percent}%"></div>
 							<span class="answer">${answer.text}</span>
 							<span class="percent">${answer.percent}%</span></div>`;
 					});
+					newHTML += "</div>";
 					stabilizer.innerHTML = newHTML;
 				} else if (data.message === 'results') {
 					newHTML = `<h2 class="header">Вы ответили правильно на ${data.correctAnswersCount} вопросов из ${data.questionCount}!</h2>

@@ -2,14 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta charset="utf-8"/>
     <title>Game Manager Room</title>
+    <link href='{% static "style.css" %}' rel="stylesheet">
 </head>
-<body>
-    <input id="game-start-button" type="button" value="Start"/>
-    <input id="question" type="button" value="question"/>
-    <input id="question-results" type="button" value="results"/>
-    <input id="user_score" type="button" value="show score"/>
+<body class="hands">
+    <div class="center">
+        <div class="input-holder">
+            <input type="text" id="loginInput" placeholder="Логин" style="bottom: -0.5em; width: 70vw;" />
+        </div>
+        <div class="input-holder">
+            <input type="password" id="passwordInput" placeholder="Пароль" />
+            <button type="button" id="loginFormButton" onclick="login()"></button>
+        </div>
+    </div>
 </body>
 <script>
     var roomName = {{ quiz_url_json }};
@@ -18,29 +26,49 @@
         'ws://' + window.location.host +
         '/ws/quiz/' + roomName + '/');
 
+    function login() {
+        let login = document.getElementById("loginInput").value;
+        let password = document.getElementById("passwordInput").value;
+        document.body.innerHTML = `<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
+            <button class="btn btn2" id="question">Следующий вопрос</button>
+            <button class="btn btn4" id="question-results">Остановить</button>
+            <button class="btn btn2" id="user_score">Показать результаты</button></div>`;
+        document.querySelector("#question-results").classList.add("disabled");
+        document.querySelector("#user_score").classList.add("disabled");
+        document.querySelector('#game-start-button').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'start'
+            }));
+            document.querySelector("#game-start-button").classList.remove("disabled");
+            document.querySelector("#question").classList.remove("disabled");
+        };
+        document.querySelector('#question').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'question'
+            }));
+            document.querySelector("#question").classList.add("disabled");
+            document.querySelector("#question-results").classList.remove("disabled");
+        };
+        document.querySelector('#question-results').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'question_results'
+            }));
+            document.querySelector("#question").classList.remove("disabled");
+            document.querySelector("#question-results").classList.add("disabled");
+        };
+        document.querySelector('#user_score').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                'message': 'results'
+            }));
+            document.querySelector("#game-start-button").classList.add("disabled");
+            document.querySelector("#question").classList.add("disabled");
+            document.querySelector("#question-results").classList.add("disabled");
+            document.querySelector("#user_score").classList.add("disabled");
+        };
+    }
+
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');
-    };
-
-    document.querySelector('#game-start-button').onclick = function(e) {
-        chatSocket.send(JSON.stringify({
-            'message': 'start'
-        }));
-    };
-    document.querySelector('#question').onclick = function(e) {
-        chatSocket.send(JSON.stringify({
-            'message': 'question'
-        }));
-    };
-    document.querySelector('#question-results').onclick = function(e) {
-        chatSocket.send(JSON.stringify({
-            'message': 'question_results'
-        }));
-    };
-    document.querySelector('#user_score').onclick = function(e) {
-        chatSocket.send(JSON.stringify({
-            'message': 'results'
-        }));
     };
 </script>
 </html>

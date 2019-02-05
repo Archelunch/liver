@@ -20,6 +20,13 @@ body.hands {
 	transform: translate(-50%, -50%);
 }
 
+.bottom {
+	position: absolute;
+	bottom: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 .btn {
 	width: 80vw;
 	min-height: 16vw;
@@ -49,7 +56,7 @@ body.hands {
 	padding-left: 8vw;
 }
 
-.btn1:active {
+.btn1:active, .btn1.chosen {
 	background-color: #9045E1;
 	box-shadow: 0 10px 0 0 #6630A0;
 	color: #ffffff;
@@ -73,12 +80,35 @@ body.hands {
 	color: #ffffff;
 }
 
+.btn3 {
+	background-color: #1FE6CA;
+	box-shadow: 0 10px 0 0 #009C86;
+	color: #6630A0;
+	text-align: center;
+}
+
+.btn3:active, .btn3.disabled {
+	background-color: #009C86;
+}
+
+.btn4 {
+	background-color: #D62ED9;
+	box-shadow: 0 10px 0 0 #9B009D;
+	color: #ffffff;
+	text-align: center;
+}
+
+.btn4:active, .btn4.disabled {
+	background-color: #9B009D;
+}
+
 .input-holder {
 	background-color: #9045E1;
 	box-shadow: 0 10px 0 0 #6630A0;
 	height: 16vw;
 	width: 80vw;
 	border-radius: 8vw;
+	margin-bottom: 2em;
 }
 
 .input-holder input {
@@ -134,6 +164,7 @@ body.hands {
 	box-shadow: 0 10px 0 0 #6630A0;
 	overflow: hidden;
 	margin-bottom: 40px;
+	position: relative;
 }
 
 .result-bar-inner-1 {
@@ -234,4 +265,9 @@ body.hands {
 .score {
 	width: 8vw;
 	text-align: center;
+}
+
+::placeholder {
+  color: #ffffff;
+  opacity: 1;
 }
