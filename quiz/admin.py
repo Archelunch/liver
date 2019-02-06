@@ -26,7 +26,7 @@ class QuizAdminForm(forms.ModelForm):
 
     class Meta:
         model = Quiz
-        exclude = ["random_order", 'max_questions', 'pass_mark', 'success_text', 'fail_text', 'single_attempt', 'exam_paper', 'single_attempt']
+        exclude = ["random_order", 'max_questions', 'pass_mark', 'success_text', 'fail_text', 'single_attempt', 'exam_paper', 'single_attempt', 'answers_at_end', 'draft', 'is_started']
 
     questions = forms.ModelMultipleChoiceField(
         queryset=Question.objects.all().select_subclasses(),
@@ -66,7 +66,7 @@ class MCQuestionAdmin(admin.ModelAdmin):
     list_display = ('content', 'category', )
     list_filter = ('category',)
     fields = ('content', 'category',
-              'figure', 'quiz', 'explanation', 'answer_order')
+              'figure', 'quiz')
 
     search_fields = ('content', 'explanation')
     filter_horizontal = ('quiz',)

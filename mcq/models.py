@@ -36,7 +36,7 @@ class MCQQuestion(Question):
             return queryset.order_by('None')
 
     def get_answers(self):
-        return self.order_answers(Answer.objects.filter(question=self))
+        return Answer.objects.filter(question=self.id)
 
     def get_answers_list(self):
         return [(answer.id, answer.content) for answer in self.order_answers(Answer.objects.filter(question=self))]

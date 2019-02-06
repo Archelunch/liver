@@ -1,7 +1,6 @@
 body {
 	padding: 0;
 	margin: 0;
-	background-image: url("./bg-simple.svg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: top;
@@ -11,6 +10,10 @@ body {
 
 body.hands {
 	background-image: url("./bg-hands.svg");
+}
+
+body.hands_simple {
+	background-image: url("./bg-simple.svg");
 }
 
 .center {

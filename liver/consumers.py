@@ -1,7 +1,7 @@
 # chat/consumers.py
 from channels.generic.websocket import AsyncWebsocketConsumer
 from quiz.models import Quiz, Category, Progress, Sitting, Question, QuizProgress, QUser
-from mcq.models import MCQQuestion
+from mcq.models import MCQQuestion, Answer
 import json
 
 class QuizConsumer(AsyncWebsocketConsumer):
@@ -37,6 +37,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
                 self.master_mode = True
                 self.question_number = 0
             self.question = self.quiz_manager.get_first_question()
+            print(Answer.objects.filter(question=1))
             self.question_number+=1
             data = {
                     'type': 'chat_message',
@@ -64,7 +65,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
 
         elif message == 'answer':
             if self.master_mode == False:
-                self.quser = QUser.objects.filter(nickname=text_data_json['name']).first()
+                self.quser = QUser.objects.filter(nickname=text_data_json['name'], quiz=self.quiz).first()
                 question = MCQQuestion.objects.filter(id=text_data_json['question_id']).first()
                 self.is_correct = question.check_if_correct(text_data_json['answer'])
                 if self.is_correct is True:
