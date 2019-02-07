@@ -27,7 +27,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             data={
                 'type': 'chat_message',
                 "message": "player_count",
-                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True)) + 1
+                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True))
             }
             await self.channel_layer.group_send(
                 self.quiz_group_name,
@@ -80,7 +80,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             data={
                 'type': 'chat_message',
                 "message": "player_count",
-                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True)) + 1
+                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True))
                 }
 
         elif message == 'answer':
