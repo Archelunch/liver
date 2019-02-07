@@ -43,6 +43,10 @@ class QuizConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        data = {
+            'type': 'chat_message',
+            'message': ""
+        }
 
         if message == 'question':
             if self.master_mode == False:
@@ -63,10 +67,14 @@ class QuizConsumer(AsyncWebsocketConsumer):
             }
         elif message == 'question_results':
             all_people = sum([ans.people_count for ans in self.question.get_answers()])
+            if all_people > 0:
+                percent = int(100.0*ans.people_count/all_people)
+            else:
+                percent = 0
             data = {
                     'type': 'chat_message',
                 	"message": "question_results",
-                    "results": [{"right":ans.correct, "percent":int(100.0*ans.people_count/all_people), "text":str(ans)} for ans in self.question.get_answers()]
+                    "results": [{"right":ans.correct, "percent":percent, "text":str(ans)} for ans in self.question.get_answers()]
             }
             self.quiz_manager.remove_first_question()
         elif message == 'results':
@@ -113,10 +121,16 @@ class QuizConsumer(AsyncWebsocketConsumer):
     async def chat_message(self, event):
         if event['message'] == "results":
             if self.master_mode == False:
-                event = {
-                    "type": 'chat_message',
-                    "message": "results",
-                    "correctAnswersCount": self.quser.get_score,
-                    "questionCount": self.question_count
-                }
+                if self.quser is not None:
+                    event = {
+                        "type": 'chat_message',
+                        "message": "results",
+                        "correctAnswersCount": self.quser.get_score,
+                        "questionCount": self.question_count
+                    }
+                else:
+                    event = {
+                        "type": 'chat_message',
+                        "message": "results"
+                    }
         await self.send(text_data=json.dumps(event))

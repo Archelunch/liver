@@ -30,7 +30,7 @@
         let login = document.getElementById("loginInput").value;
         let password = document.getElementById("passwordInput").value;
         //<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
-        document.body.innerHTML = `<button class="btn btn2" id="question">Следующий вопрос</button>
+        document.body.innerHTML = `<div class="center"><button class="btn btn2" id="question">Следующий вопрос</button>
             <button class="btn btn4" id="question-results">Остановить</button>
             <button class="btn btn2" id="user_score">Показать результаты</button></div>`;
         document.querySelector("#question-results").classList.add("disabled");
@@ -41,7 +41,6 @@
             }));
             //document.querySelector("#game-start-button").classList.remove("disabled");
             document.querySelector("#question").classList.remove("disabled");
-        };
         document.querySelector('#question').onclick = function(e) {
             chatSocket.send(JSON.stringify({
                 'message': 'question'
@@ -65,7 +64,7 @@
             document.querySelector("#question-results").classList.add("disabled");
             document.querySelector("#user_score").classList.add("disabled");
         };
-    }
+    };
 
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');

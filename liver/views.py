@@ -20,6 +20,11 @@ def quiz_start(request, url, code):
             'quiz_url_json': mark_safe(json.dumps(url)),
             'quiz_object':quiz
             })
+        elif "watcher" == code:
+            return render(request, 'watcher.html', {
+            'quiz_url_json': mark_safe(json.dumps(url)),
+            'quiz_object':quiz
+            })
         else:
             return render(request, '403.html')
     else:
@@ -65,7 +70,7 @@ def leaderborad(request):
         else:
             data['class'] = ''
         users_board.append(data)
-    if not user_in_list:
+    if not user_in_list and username != "":
         user = QUser.objects.filter(nickname=username, quiz=quiz).first()
         user_personal = {'name':user.nickname, 'score':user.score, 'class':'user'}
         for ind, user_s in enumerate(users):

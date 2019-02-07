@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{% static 'Montserrat.css' %}" rel="stylesheet">
+        <title>HandsApp</title>
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+    </head>
+    <body class="hands">
+        <div id="gamezone">
+            <div class="center" id="main">
+                <button class="btn btn-main center" id="mainButton">HANDSAPP</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        var status_start = "{{quiz_object.is_started}}";
+        let main = document.getElementById('main');
+        let gamezone = document.getElementById('gamezone');
+        let name="", code, xhr, question_id;
+        var people_count=1;
+        var roomName = {{ quiz_url_json }};
+        var chatSocket = new WebSocket(
+            'ws://' + window.location.host +
+            '/ws/quiz/' + roomName + '/');
+
+        chatSocket.onclose = function(e) {
+            console.error('Game socket closed unexpectedly');
+        };
+    
+        function processResults() {
+            if (xhr.readyState != 4) return;
+            gamezone.innerHTML = xhr.responseText;
+        }
+    
+        function loadResults(d) {
+            console.log(name);
+            console.log(roomName);
+            $.ajax({
+                'url': '/liver/leaderboard',
+                'type': 'GET',
+                'data': {
+                    'name':name,
+                    'url': roomName
+                },
+                'success': (data) => {
+                    if (data.length >= 100) {
+                        gamezone.innerHTML = data;
+                    }
+                }
+            });
+        }
+    
+        chatSocket.onmessage = function processMessage(d) {
+            let data = JSON.parse(d.data);
+            let newHTML;
+            if (data.message === 'question') {
+                newHTML = `
+                    <p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
+                    <h2 class="header">${data.questionText}</h2>
+                    <div class="stab"><div class="bottom" id="main">`;
+                data.answers.forEach((answer, index) => {
+                    newHTML += `<button class="btn btn1 answer" disabled>${answer}</button>`;
+                });
+                newHTML += "</div></div>";
+                gamezone.innerHTML = newHTML;
+            } else if (data.message === 'question_results') {
+                let stabilizer = document.getElementsByClassName('stab')[0];
+                newHTML = `<div class="bottom" id="main">`;
+                data.results.forEach((answer) => {
+                    newHTML += `<div class="btn result-bar-outer">
+                        <div class="result-bar-inner-${answer.right ? 1 : 2}" style="width: ${answer.percent}%"></div>
+                        <span class="answer">${answer.text}</span>
+                        <span class="percent">${answer.percent}%</span></div>`;
+                });
+                newHTML += "</div>";
+                stabilizer.innerHTML = newHTML;
+            } else if (data.message === 'results') {
+                loadResults();
+            } else if (data.message === 'player_count') {
+                people_count = data.count;
+                gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+            }
+        }
+    
+        function openWaitingScreen() {
+            $.ajax({
+                url: '/liver/validate_code',
+                data: {
+                    'code': code,
+                    'url': roomName
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (true) {
+                        console.log("OK");
+                    }
+                }
+            });
+
+            gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет 1 человек</p>`;
+        };
+    
+        function openCodeForm() {
+            main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
+            document.getElementById('codeFormButton').addEventListener('click', openWaitingScreen);
+        };
+    
+        document.getElementById('mainButton').addEventListener('click', openCodeForm);
+    </script>
+    <script src='{% static "jquery-3.1.0.min.js" %}'></script>
+</html>
