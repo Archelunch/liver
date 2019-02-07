@@ -7,12 +7,15 @@
 	<link href='{% static "style.css" %}' rel="stylesheet">
 </head>
 <body class="hands">
+	<div id="gamezone">
 	<div class="center" id="main">
 		<button class="btn btn-main center" id="mainButton">HANDSAPP</button>
 	</div>
+</div>
 	<script>
 			var status_start = "{{quiz_object.is_started}}";
 			let main = document.getElementById('main');
+			let gamezone = document.getElementById('gamezone');
 			let name, code, xhr, question_id;
 			var people_count=1;
 			var roomName = {{ quiz_url_json }};
@@ -34,10 +37,12 @@
 		
 			function processResults() {
 				if (xhr.readyState != 4) return;
-				document.body.innerHTML = xhr.responseText;
+				gamezone.innerHTML = xhr.responseText;
 			}
 		
 			function loadResults(d) {
+				console.log(name);
+				console.log(roomName);
 				$.ajax({
 					'url': '/liver/leaderboard',
 					'type': 'GET',
@@ -45,11 +50,9 @@
 						'name':name,
 						'url': roomName
 					},
-					'processData': false,
-					'contentType': false,
 					'success': (data) => {
 						if (data.length >= 100) {
-							document.body.innerHTML = data;
+							gamezone.innerHTML = data;
 						}
 					}
 				});
@@ -67,7 +70,7 @@
 						newHTML += `<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer(${data.ids[index]}, ${data.question_id})">${answer}</button>`;
 					});
 					newHTML += "</div></div>";
-					document.body.innerHTML = newHTML;
+					gamezone.innerHTML = newHTML;
 				} else if (data.message === 'question_results') {
 					let stabilizer = document.getElementsByClassName('stab')[0];
 					newHTML = `<div class="bottom" id="main">`;
@@ -85,11 +88,11 @@
 						<div class="center">
 							<button class="btn btn2" id="resultsButton">Все результаты</button>
 						</div>`;
-					document.body.innerHTML = newHTML;
+						gamezone.innerHTML = newHTML;
 					document.getElementById('resultsButton').addEventListener('click', loadResults);
 				} else if (data.message === 'player_count') {
 					people_count = data.count;
-					document.body.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+					gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
 				}
 			}
 		
@@ -112,7 +115,7 @@
 				});
 
 				// document.body.className = "hands_simple"
-				document.body.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
 				chatSocket.send(JSON.stringify({message: "new_user", name: name}));
 			};
 		

@@ -51,8 +51,8 @@ def validate_code(request):
 def leaderborad(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
-    username = request.GET.get('username', None)
-    users = QUser.objects.order_by('-score')
+    username = request.GET.get('name', None)
+    users = QUser.objects.filter(quiz=quiz).order_by('-score')
     users_board = []
     user_in_list = False
     for ind, user in enumerate(users[:10]):
@@ -62,6 +62,8 @@ def leaderborad(request):
             user_in_list = True
         elif ind == 0:
             data['class'] = 'top'
+        else:
+            data['class'] = ''
         users_board.append(data)
     if not user_in_list:
         user = QUser.objects.filter(nickname=username, quiz=quiz).first()

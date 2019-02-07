@@ -6,7 +6,7 @@
 		<div class="score">Счет</div>
 	</div>
 	{% for user in users %}
-	<div class="row {{user['class']}}{% if user['winner'] %}top{% elif user['this'] %}user{% endif %}">
+	<div class="row {{user.class}}">
 		<div class="position">{{ user.position }}</div>
 		<div class="name">{{ user.name }}</div>
 		<div class="score">{{ user.score }}</div>

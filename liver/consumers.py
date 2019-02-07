@@ -76,7 +76,6 @@ class QuizConsumer(AsyncWebsocketConsumer):
             }
 
         elif message == 'new_user':
-            self.quser = QUser.objects.filter(nickname=text_data_json['name'], quiz=self.quiz).first()
             data={
                 'type': 'chat_message',
                 "message": "player_count",
@@ -85,6 +84,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
 
         elif message == 'answer':
             if self.master_mode == False:
+                self.quser = QUser.objects.filter(nickname=text_data_json['name'], quiz=self.quiz).first()
                 question = MCQQuestion.objects.filter(id=text_data_json['question_id']).first()
                 self.is_correct = question.check_if_correct(text_data_json['answer'])
                 if self.is_correct is True:
