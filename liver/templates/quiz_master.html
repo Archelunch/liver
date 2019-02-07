@@ -30,23 +30,34 @@
         let login = document.getElementById("loginInput").value;
         let password = document.getElementById("passwordInput").value;
         //<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
+        chatSocket.onmessage = function processMessage(d) {
+            let data = JSON.parse(d.data);
+            if (data.message === 'stop_quiz') {
+                document.querySelector("#question").disabled = true;
+                document.querySelector("#question-results").disabled = true;
+            }
+        }
         document.body.innerHTML = `<div class="center"><button class="btn btn2" id="question">Следующий вопрос</button>
             <button class="btn btn4" id="question-results">Остановить</button>
             <button class="btn btn2" id="user_score">Показать результаты</button></div>`;
         document.querySelector("#question-results").classList.add("disabled");
         document.querySelector("#user_score").classList.add("disabled");
-        //document.querySelector('#game-start-button').onclick = function(e) {
-            chatSocket.send(JSON.stringify({
-                'message': 'start'
-            }));
+        document.querySelector("#question-results").disabled = true;
+        document.querySelector("#user_score").disabled = false;
+        // document.querySelector('#game-start-button').onclick = function(e) {
+        //     chatSocket.send(JSON.stringify({
+        //         'message': 'start'
+        //     }));
             //document.querySelector("#game-start-button").classList.remove("disabled");
-            document.querySelector("#question").classList.remove("disabled");
+            //document.querySelector("#question").classList.remove("disabled");
         document.querySelector('#question').onclick = function(e) {
             chatSocket.send(JSON.stringify({
                 'message': 'question'
             }));
             document.querySelector("#question").classList.add("disabled");
             document.querySelector("#question-results").classList.remove("disabled");
+            document.querySelector("#question").disabled = true;
+            document.querySelector("#question-results").disabled = false;
         };
         document.querySelector('#question-results').onclick = function(e) {
             chatSocket.send(JSON.stringify({
@@ -54,6 +65,8 @@
             }));
             document.querySelector("#question").classList.remove("disabled");
             document.querySelector("#question-results").classList.add("disabled");
+            document.querySelector("#question").disabled = false;
+            document.querySelector("#question-results").disabled = true;
         };
         document.querySelector('#user_score').onclick = function(e) {
             chatSocket.send(JSON.stringify({
@@ -63,8 +76,11 @@
             document.querySelector("#question").classList.add("disabled");
             document.querySelector("#question-results").classList.add("disabled");
             document.querySelector("#user_score").classList.add("disabled");
+            document.querySelector("#question").disabled = true;
+            document.querySelector("#question-results").disabled = true;
+            document.querySelector("#user_score").disabled = true;
         };
-    };
+     };
 
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');

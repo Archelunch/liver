@@ -27,7 +27,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             data={
                 'type': 'chat_message',
                 "message": "player_count",
-                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True))
+                "count": QUser.objects.filter(quiz=self.quiz, is_online=True).count()
             }
             await self.channel_layer.group_send(
                 self.quiz_group_name,
@@ -54,27 +54,33 @@ class QuizConsumer(AsyncWebsocketConsumer):
                 self.master_mode = True
                 self.question_number = 0
             self.question = self.quiz_manager.get_first_question()
-            self.question_number+=1
-            data = {
+            if self.question != False:
+                self.question_number+=1
+                data = {
+                        'type': 'chat_message',
+                        "message": "question",
+                        "question_id": self.question.id,
+                        "questionText": str(self.question),
+                        "questionNumber": self.question_number, # номер текущего вопроса
+                        "questionCount": len(self.quiz_manager._question_ids()), # количество вопросов
+                        "answers": [str(ans) for ans in self.question.get_answers()],
+                        "ids": [ans.id for ans in self.question.get_answers()]
+                }
+            else:
+                data = {
                     'type': 'chat_message',
-                	"message": "question",
-                    "question_id": self.question.id,
-                    "questionText": str(self.question),
-                    "questionNumber": self.question_number, # номер текущего вопроса
-                    "questionCount": len(self.quiz_manager._question_ids()), # количество вопросов
-                    "answers": [str(ans) for ans in self.question.get_answers()],
-                    "ids": [ans.id for ans in self.question.get_answers()]
-            }
+                    "message": "stop_quiz"
+                }
         elif message == 'question_results':
             all_people = sum([ans.people_count for ans in self.question.get_answers()])
             if all_people > 0:
-                percent = int(100.0*ans.people_count/all_people)
+                percent = [int(100.0*ans.people_count/all_people) for ans in self.question.get_answers()]
             else:
-                percent = 0
+                percent = [0 for ans in self.question.get_answers()]
             data = {
                     'type': 'chat_message',
                 	"message": "question_results",
-                    "results": [{"right":ans.correct, "percent":percent, "text":str(ans)} for ans in self.question.get_answers()]
+                    "results": [{"right":ans.correct, "percent":percent[ind], "text":str(ans)} for ind, ans in enumerate(self.question.get_answers())]
             }
             self.quiz_manager.remove_first_question()
         elif message == 'results':
@@ -87,7 +93,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             data={
                 'type': 'chat_message',
                 "message": "player_count",
-                "count": len(QUser.objects.filter(quiz=self.quiz, is_online=True))
+                "count": QUser.objects.filter(quiz=self.quiz, is_online=True).count()
                 }
 
         elif message == 'answer':
@@ -131,6 +137,8 @@ class QuizConsumer(AsyncWebsocketConsumer):
                 else:
                     event = {
                         "type": 'chat_message',
-                        "message": "results"
+                        "message": "results",
+                        "correctAnswersCount": 0,
+                        "questionCount": self.question_count
                     }
         await self.send(text_data=json.dumps(event))

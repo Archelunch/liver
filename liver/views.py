@@ -70,7 +70,7 @@ def leaderborad(request):
         else:
             data['class'] = ''
         users_board.append(data)
-    if not user_in_list and username != "":
+    if not user_in_list and username != None:
         user = QUser.objects.filter(nickname=username, quiz=quiz).first()
         user_personal = {'name':user.nickname, 'score':user.score, 'class':'user'}
         for ind, user_s in enumerate(users):
