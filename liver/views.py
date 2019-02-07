@@ -30,10 +30,11 @@ def validate_username(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
     username = request.GET.get('username', None)
-    quser = QUser(nickname=username, quiz=quiz)
+    quser = QUser(nickname=username, quiz=quiz, is_online=True)
     quser.save()
     data = {
-        'resp': 200
+        'resp': 200,
+        'count': len(QUser.objects.filter(quiz=quiz, is_online=True))
     }
     return JsonResponse(data)
 
@@ -45,3 +46,29 @@ def validate_code(request):
         'code': code
     }
     return JsonResponse(data)
+
+
+def leaderborad(request):
+    url = request.GET.get('url', None)
+    quiz = Quiz.objects.filter(url=url).first()
+    username = request.GET.get('username', None)
+    users = QUser.objects.order_by('-score')
+    users_board = []
+    user_in_list = False
+    for ind, user in enumerate(users[:10]):
+        data = {'position':ind+1, 'name':user.nickname, 'score':user.score}
+        if user.nickname == username:
+            data['class'] = 'user'
+            user_in_list = True
+        elif ind == 0:
+            data['class'] = 'top'
+        users_board.append(data)
+    if not user_in_list:
+        user = QUser.objects.filter(nickname=username, quiz=quiz).first()
+        user_personal = {'name':user.nickname, 'score':user.score, 'class':'user'}
+        for ind, user_s in enumerate(users):
+            if user.id == user_s.id:
+                user_personal['position'] = ind+1
+                break
+        return render(request, 'leaderboard.html', {'users':users_board, 'user_personal':user_personal})
+    return render(request, 'leaderboard.html', {'users':users_board})

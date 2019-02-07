@@ -168,6 +168,8 @@ class QUser(models.Model):
         max_length=1024, blank=True, verbose_name=_("Incorrect questions"))
     user_answers = models.TextField(blank=True, default='{}',
                                     verbose_name=_("User Answers"))
+    is_online = models.BooleanField(default=False, blank=False,
+                                   verbose_name=_("Is he taking part now?"))
 
     @property
     def get_score(self):
