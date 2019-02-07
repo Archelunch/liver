@@ -33,7 +33,7 @@ body.hands_simple {
 
 .btn {
 	width: 80vw;
-	min-height: 16vw;
+	height: 16vw;
 	border-radius: 8vw;
 	border: none;
 	font-family: 'Montserrat', sans-serif;
@@ -275,4 +275,86 @@ body.hands_simple {
 ::placeholder {
   color: #ffffff;
   opacity: 1;
+}
+
+@media screen and (min-width: 1200px) {
+	body {
+		background-image: url("/static/particles.svg") !important;
+	}
+
+	.btn {
+		width: 30vw;
+		height: 6vw;
+		font-size: 2vw;
+	}
+
+	.btn-main {
+		width: 16vw;
+		height: 6vw;
+		font-size: 2vw;
+	}
+
+	.input-holder {
+		width: 30vw;
+		height: 6vw;
+		font-size: 2vw;
+	}
+
+	.input-holder input {
+		width: 17vw;
+		height: 4vw;
+		bottom: 0;
+		left: 1vw;
+		font-size: 2vw;
+	}
+
+	.input-holder button {
+		width: 4vw;
+		height: 4vw;
+		left: 2vw;
+		top: 1vw;
+	}
+
+	.header {
+		font-size: 4vw;
+		margin: 0;
+		padding: 2vw 8vw;
+		margin-bottom: 1vw;
+	}
+
+	.simple-text {
+		font-size: 3vw;
+		margin: 0;
+		padding: 1vw 8vw;
+	}
+
+	.bottom {
+		width: 30vw;
+		bottom: 10%;
+	}
+
+	.result-bar-outer span {
+		line-height: 6vw;
+	}
+
+	.row {
+		width: 30vw;
+		height: 4vw;
+	}
+
+	.row div {
+		font-size: 2vw;
+	}
+
+	.position {
+		width: 4vw;
+	}
+
+	.score {
+		width: 4vw;
+	}
+
+	.name {
+		width: 21vw;
+	}
 }
