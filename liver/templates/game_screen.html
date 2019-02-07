@@ -92,7 +92,11 @@
 					document.getElementById('resultsButton').addEventListener('click', loadResults);
 				} else if (data.message === 'player_count') {
 					people_count = data.count;
-					gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+					var counter = document.getElementById("user_count");
+					if (counter) {
+						counter.innerHTML = people_count;
+					}
+					//gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
 				}
 			}
 		
@@ -115,7 +119,7 @@
 				});
 
 				// document.body.className = "hands_simple"
-				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет </p> <p class="simple-text" id="user_count>${people_count}</p> <p class="simple-text"> человек</p>`;
 				chatSocket.send(JSON.stringify({message: "new_user", name: name}));
 			};
 		
