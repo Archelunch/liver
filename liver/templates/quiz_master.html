@@ -29,17 +29,17 @@
     function login() {
         let login = document.getElementById("loginInput").value;
         let password = document.getElementById("passwordInput").value;
-        document.body.innerHTML = `<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
-            <button class="btn btn2" id="question">Следующий вопрос</button>
+        //<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
+        document.body.innerHTML = `<button class="btn btn2" id="question">Следующий вопрос</button>
             <button class="btn btn4" id="question-results">Остановить</button>
             <button class="btn btn2" id="user_score">Показать результаты</button></div>`;
         document.querySelector("#question-results").classList.add("disabled");
         document.querySelector("#user_score").classList.add("disabled");
-        document.querySelector('#game-start-button').onclick = function(e) {
+        //document.querySelector('#game-start-button').onclick = function(e) {
             chatSocket.send(JSON.stringify({
                 'message': 'start'
             }));
-            document.querySelector("#game-start-button").classList.remove("disabled");
+            //document.querySelector("#game-start-button").classList.remove("disabled");
             document.querySelector("#question").classList.remove("disabled");
         };
         document.querySelector('#question').onclick = function(e) {
@@ -60,7 +60,7 @@
             chatSocket.send(JSON.stringify({
                 'message': 'results'
             }));
-            document.querySelector("#game-start-button").classList.add("disabled");
+            //document.querySelector("#game-start-button").classList.add("disabled");
             document.querySelector("#question").classList.add("disabled");
             document.querySelector("#question-results").classList.add("disabled");
             document.querySelector("#user_score").classList.add("disabled");
