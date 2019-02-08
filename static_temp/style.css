@@ -279,7 +279,7 @@ body.hands_simple {
   opacity: 1;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1200px) {
 	body {
 		background-image: url("/static/particles.svg") !important;
 	}
