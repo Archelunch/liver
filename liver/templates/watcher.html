@@ -67,7 +67,7 @@
                 let stabilizer = document.getElementsByClassName('stab')[0];
                 newHTML = `<div class="bottom" id="main">`;
                 data.results.forEach((answer) => {
-                    newHTML += `<div class="btn result-bar-outer-${answer.right ? 1 : 2}">
+                    newHTML += `<div class="btn result-bar-outer">
                         <div class="result-bar-inner-${answer.right ? 1 : 2}" style="width: ${answer.percent}%"></div>
                         <span class="answer">${answer.text}</span>
                         <span class="percent">${answer.percent}%</span></div>`;
