@@ -44,7 +44,7 @@
 				console.log(name);
 				console.log(roomName);
 				$.ajax({
-					'url': '/liver/leaderboard',
+					'url': '/leaderboard',
 					'type': 'GET',
 					'data': {
 						'name':name,
@@ -104,7 +104,7 @@
 				name = document.getElementById('nameInput').value;
 				console.log(name)
 				$.ajax({
-					url: '/liver/validate_username',
+					url: '/validate_username',
 					data: {
 					'username': name,
 					'url': roomName
@@ -131,7 +131,7 @@
 			function openNameForm() {
 				code = document.getElementById('codeInput').value;
 				$.ajax({
-					url: '/liver/validate_code',
+					url: '/validate_code',
 					data: {
 					'code': code,
 					'url': roomName

@@ -37,7 +37,7 @@
             console.log(name);
             console.log(roomName);
             $.ajax({
-                'url': '/liver/leaderboard',
+                'url': '/leaderboard',
                 'type': 'GET',
                 'data': {
                     'url': roomName
@@ -87,7 +87,7 @@
     
         function openWaitingScreen() {
             $.ajax({
-                url: '/liver/validate_code',
+                url: '/validate_code',
                 data: {
                     'code': code,
                     'url': roomName
