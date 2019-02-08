@@ -50,12 +50,10 @@ body.hands_simple {
 	color: #ffffff;
 	font-size: 6vw;
 	font-weight: 700;
-	box-shadow: 0 10px 0 0 #952196;
 }
 
 .btn1 {
 	background-color: #ffffff;
-	box-shadow: 0 10px 0 0 #B28BD5;
 	color: #7137B0;
 	text-align: left;
 	padding-left: 8vw;
@@ -63,7 +61,6 @@ body.hands_simple {
 
 .btn1:active, .btn1.chosen {
 	background-color: #9045E1;
-	box-shadow: 0 10px 0 0 #6630A0;
 	color: #ffffff;
 }
 
@@ -75,19 +72,16 @@ body.hands_simple {
 	background-size: auto 35%;
 	text-align: left;
 	padding-left: 8vw;
-	box-shadow: 0 10px 0 0 #6630A0;
 	color: #ffffff;
 }
 
 .btn2:active {
 	background-color: #6630A0;
-	box-shadow: 0 10px 0 0 #9045E1;
 	color: #ffffff;
 }
 
 .btn3 {
 	background-color: #1FE6CA;
-	box-shadow: 0 10px 0 0 #009C86;
 	color: #6630A0;
 	text-align: center;
 }
@@ -98,7 +92,6 @@ body.hands_simple {
 
 .btn4 {
 	background-color: #D62ED9;
-	box-shadow: 0 10px 0 0 #9B009D;
 	color: #ffffff;
 	text-align: center;
 }
@@ -166,7 +159,6 @@ body.hands_simple {
 .result-bar-outer {
 	padding: 0;
 	background-color: #9045E1;
-	box-shadow: 0 10px 0 0 #6630A0;
 	overflow: hidden;
 	margin-bottom: 40px;
 	position: relative;
@@ -178,7 +170,7 @@ body.hands_simple {
 	position: absolute;
 	margin: 0;
 	width: 69%;
-	background-color: #1FE6CA;
+	background-color: #78DA75;
 }
 
 .result-bar-inner-2 {
@@ -187,7 +179,7 @@ body.hands_simple {
 	position: absolute;
 	margin: 0;
 	width: 69%;
-	background-color: #D62ED8;
+	background-color: #FE6479;
 }
 
 .result-bar-outer span {
@@ -207,8 +199,8 @@ body.hands_simple {
 .header {
 	display:block;
 	font-family: 'Montserrat', sans-serif;
-	font-weight: 850;
-	font-size: 8vw;
+	font-weight: 800;
+	font-size: 6vw;
 	color: white;
 	margin: 8vw;
 	margin-bottom: 10px;
