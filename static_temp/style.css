@@ -10,7 +10,7 @@ body {
 }
 
 body.hands {
-	background-image: url("./bg-hands.svg");
+	background-image: url("./bg-simple.svg");
 }
 
 body.hands_simple {
