@@ -303,11 +303,13 @@ body.hands_simple {
 	}
 
 	.input-holder input {
-		width: 17vw;
+		width: 21vw;
 		height: 4vw;
 		bottom: 0;
 		left: 1vw;
 		font-size: 2vw;
+		border-radius: 2vw;
+		padding-left: 2vw;
 	}
 
 	.input-holder button {
@@ -340,7 +342,7 @@ body.hands_simple {
 	}
 
 	.row {
-		width: 30vw;
+		width: 50vw;
 		height: 3vw;
 	}
 
@@ -359,10 +361,22 @@ body.hands_simple {
 	}
 
 	.name {
-		width: 21vw;
+		width: 41vw;
 	}
 
 	.result-bar-inner-1, .result-bar-inner-2 {
 		border-radius: 3vw 0 0 3vw;
+	}
+
+	.btn1 {
+		padding-left: 3vw;
+	}
+
+	.answer {
+		left: 3vw;
+	}
+
+	.percent {
+		right: 1.5vw;
 	}
 }
