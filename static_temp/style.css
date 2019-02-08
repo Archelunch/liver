@@ -368,8 +368,4 @@ body.hands_simple {
 	.name {
 		width: 21vw;
 	}
-
-	.result-bar-inner-1, .result-bar-inner-2 {
-		border-radius: 3vw 0 0 3vw;
-	}
 }
