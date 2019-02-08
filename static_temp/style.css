@@ -32,6 +32,7 @@ body.hands_simple {
 }
 
 .btn {
+	display:block;
 	width: 80vw;
 	height: 16vw;
 	border-radius: 8vw;
@@ -204,6 +205,7 @@ body.hands_simple {
 }
 
 .header {
+	display:block;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 850;
 	font-size: 8vw;
