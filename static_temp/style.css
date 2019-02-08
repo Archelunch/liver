@@ -178,6 +178,7 @@ body.hands_simple {
 	margin: 0;
 	width: 69%;
 	background-color: #1FE6CA;
+	border: 2px solid #1FE6CA;
 }
 
 .result-bar-inner-2 {
