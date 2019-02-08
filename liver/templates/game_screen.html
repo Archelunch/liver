@@ -61,7 +61,7 @@
 			chatSocket.onmessage = function processMessage(d) {
 				let data = JSON.parse(d.data);
 				let newHTML;
-				if (data.message === 'question') {
+				if (data.message === 'question' && data.status === 'player') {
 					newHTML = `
 						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
 						<h2 class="header">${data.questionText}</h2>
@@ -71,7 +71,7 @@
 					});
 					newHTML += "</div></div>";
 					gamezone.innerHTML = newHTML;
-				} else if (data.message === 'question_results') {
+				} else if (data.message === 'question_results' && data.status === 'player') {
 					let stabilizer = document.getElementsByClassName('stab')[0];
 					newHTML = `<div class="bottom" id="main">`;
 					data.results.forEach((answer) => {

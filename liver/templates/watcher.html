@@ -78,7 +78,10 @@
                 loadResults();
             } else if (data.message === 'player_count') {
                 people_count = data.count;
-                gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
+                var counter = document.getElementById("user-text");
+                if (counter) {
+                    counter.innerHTML = `С вами уже играет ${people_count} человек`;
+                }
             }
         }
     
@@ -97,8 +100,8 @@
                 }
             });
 
-            gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет 1 человек</p>`;
-        };
+            gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
+				};
     
         function openCodeForm() {
             main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';

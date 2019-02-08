@@ -9,6 +9,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
         self.url = self.scope['url_route']['kwargs']['url']
         self.quiz = Quiz.objects.filter(url=self.url).first()
         self.quser = None
+        self.nickname = None
         self.quiz_group_name = self.quiz.title
         self.question_count = len(self.quiz.question_set.all())
         self.master_mode = False
@@ -90,6 +91,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
             }
 
         elif message == 'new_user':
+            self.nickname = text_data_json['name']
             data={
                 'type': 'chat_message',
                 "message": "player_count",
@@ -126,6 +128,11 @@ class QuizConsumer(AsyncWebsocketConsumer):
 
     # Receive message from room group
     async def chat_message(self, event):
+        if event['message'] == "question" or event['message'] == "question_results":
+            if self.nickname == None:
+                event['status'] = "watcher"
+            else:
+                event['status'] = "player"
         if event['message'] == "results":
             if self.master_mode == False:
                 if self.quser is not None:
