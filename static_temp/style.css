@@ -186,6 +186,7 @@ body.hands_simple {
 	position: absolute;
 	line-height: 16vw;
 	color: #ffffff;
+	word-wrap: break-word;
 }
 
 .answer {

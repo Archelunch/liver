@@ -100,8 +100,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
 
         elif message == 'answer':
             if self.master_mode == False:
-                print(text_data_json)
-                self.quser = QUser.objects.filter(nickname=text_data_json['name'], quiz=self.quiz).first()
+                self.quser = QUser.objects.filter(id=text_data_json['name'], quiz=self.quiz).first()
                 question = MCQQuestion.objects.filter(id=text_data_json['question_id']).first()
                 self.is_correct = question.check_if_correct(text_data_json['answer'])
                 if self.is_correct is True:

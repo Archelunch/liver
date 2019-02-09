@@ -39,6 +39,7 @@ def validate_username(request):
     quser.save()
     data = {
         'resp': 200,
+        'user_id': quser.id,
         'count': len(QUser.objects.filter(quiz=quiz, is_online=True))
     }
     return JsonResponse(data)
