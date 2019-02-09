@@ -278,7 +278,7 @@ body.hands_simple {
 	}
 
 	.btn {
-		width: 30vw;
+		width: 35vw;
 		height: 6vw;
 		font-size: 2vw;
 	}
@@ -331,7 +331,7 @@ body.hands_simple {
 	}
 
 	.result-bar-outer span {
-		line-height: 6vw;
+		line-height: 3vw;
 	}
 
 	.row {
