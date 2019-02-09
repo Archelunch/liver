@@ -366,6 +366,7 @@ body.hands_simple {
 
 	.answer {
 		left: 3vw;
+		word-wrap: break-word;
 	}
 
 	.percent {
