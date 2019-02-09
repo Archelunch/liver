@@ -63,7 +63,7 @@ def leaderborad(request):
     user_in_list = False
     for ind, user in enumerate(users[:10]):
         data = {'position':ind+1, 'name':user.nickname, 'score':user.score}
-        if user.nickname == username:
+        if user.id == username:
             data['class'] = 'user'
             user_in_list = True
         elif ind == 0:
@@ -72,7 +72,7 @@ def leaderborad(request):
             data['class'] = ''
         users_board.append(data)
     if not user_in_list and username != None:
-        user = QUser.objects.filter(nickname=username, quiz=quiz).first()
+        user = QUser.objects.filter(id=username, quiz=quiz).first()
         user_personal = {'name':user.nickname, 'score':user.score, 'class':'user'}
         for ind, user_s in enumerate(users):
             if user.id == user_s.id:
