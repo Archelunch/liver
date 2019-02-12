@@ -24,6 +24,13 @@ body.hands_simple {
 	transform: translate(-50%, -50%);
 }
 
+.footer {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 .bottom {
 	position: absolute;
 	bottom: 20%;

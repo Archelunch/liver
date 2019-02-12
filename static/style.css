@@ -24,6 +24,13 @@ body.hands_simple {
 	transform: translate(-50%, -50%);
 }
 
+.footer {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 .bottom {
 	position: absolute;
 	bottom: 20%;
@@ -186,6 +193,7 @@ body.hands_simple {
 	position: absolute;
 	line-height: 16vw;
 	color: #ffffff;
+	word-wrap: break-word;
 }
 
 .answer {
@@ -277,7 +285,7 @@ body.hands_simple {
 	}
 
 	.btn {
-		width: 30vw;
+		width: 35vw;
 		height: 6vw;
 		font-size: 2vw;
 	}
@@ -330,7 +338,7 @@ body.hands_simple {
 	}
 
 	.result-bar-outer span {
-		line-height: 6vw;
+		line-height: 3vw;
 	}
 
 	.row {
