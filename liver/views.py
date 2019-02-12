@@ -46,10 +46,11 @@ def validate_username(request):
 
 
 def validate_code(request):
-    code = request.GET.get('code', None)
+    code = request.GET.get('code', '').lower()
+    quiz = Quiz.objects.filter(user_code=code).first()
     data = {
-        'resp': 200,
-        'code': code
+        'resp': 200 if quiz else 404,
+        'url': quiz.url if quiz else 404
     }
     return JsonResponse(data)
 
