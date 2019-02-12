@@ -23,7 +23,7 @@
     var roomName = {{ quiz_url_json }};
 
     var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
+        'wss://' + window.location.host +
         '/ws/quiz/' + roomName + '/');
 
     function login() {

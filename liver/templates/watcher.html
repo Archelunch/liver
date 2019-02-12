@@ -26,7 +26,7 @@
         var people_count=1;
         var roomName = {{ quiz_url_json }};
         var chatSocket = new WebSocket(
-            'ws://' + window.location.host +
+            'wss://' + window.location.host +
             '/ws/quiz/' + roomName + '/');
 
         chatSocket.onclose = function(e) {
