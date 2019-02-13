@@ -62,7 +62,7 @@ def validate_code(request):
 def leaderborad(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
-    username = request.GET.get('name', None)
+    username = int(request.GET.get('name', None))
     users = QUser.objects.filter(quiz=quiz).order_by('-score')
     users_board = []
     user_in_list = False
