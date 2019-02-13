@@ -143,6 +143,8 @@
 								console.error('Game socket closed unexpectedly');
 							};
 							chatSocket.onmessage = processMessage;
+							main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
+				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 					}
 					else{
 						alert("Incorrect code!")
@@ -150,8 +152,6 @@
 					}
 					}
 				});
-				main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
-				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 			};
 		
 			document.getElementById('mainButton').addEventListener('click', openCodeForm);
