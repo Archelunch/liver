@@ -12,7 +12,7 @@
                 <button class="btn btn-main center" id="mainButton">HANDSAPP</button>
             </div>
         </div>
-        <div>
+        <div id="footemail">
             <a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
         </div>
     </body>
@@ -57,6 +57,7 @@
             let data = JSON.parse(d.data);
             let newHTML;
             if (data.message === 'question') {
+                document.getElementById("footemail").style.visibility = "hidden";
                 newHTML = `
                     <p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
                     <h2 class="header">${data.questionText}</h2>
@@ -78,6 +79,7 @@
                 newHTML += "</div>";
                 stabilizer.innerHTML = newHTML;
             } else if (data.message === 'results') {
+                document.getElementById("footemail").style.visibility = "visible";
                 loadResults();
             } else if (data.message === 'player_count') {
                 people_count = data.count;
