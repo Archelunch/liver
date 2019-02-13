@@ -16,19 +16,11 @@
 	<a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
 </div>
 	<script>
-			var status_start = "{{quiz_object.is_started}}";
 			let main = document.getElementById('main');
 			let gamezone = document.getElementById('gamezone');
 			let name, code, xhr, question_id;
 			var people_count=1;
-			var roomName = {{ quiz_url_json }};
-			var chatSocket = new WebSocket(
-				'wss://' + window.location.host +
-				'/ws/quiz/' + roomName + '/');
-
-			    chatSocket.onclose = function(e) {
-					console.error('Game socket closed unexpectedly');
-				};
+			let roomName, chatSocket;
 		
 			function sendAnswer(ind, question_id) {
 				chatSocket.send(JSON.stringify({message: "answer", name: name, answer: ind, question_id: question_id}));
@@ -61,7 +53,7 @@
 				});
 			}
 		
-			chatSocket.onmessage = function processMessage(d) {
+			function processMessage(d) {
 				let data = JSON.parse(d.data);
 				let newHTML;
 				if (data.message === 'question' && data.status === 'player') {
@@ -137,14 +129,24 @@
 				$.ajax({
 					url: '/validate_code',
 					data: {
-					'code': code,
-					'url': roomName
+					'code': code
 					},
 					dataType: 'json',
 					success: function (data) {
-					if (true) {
-						console.log("Wrong code");
-						//openCodeForm(true);
+					if (data['resp']==200) {
+						roomName = data['url'];
+						chatSocket = new WebSocket(
+							'wss://' + window.location.host +
+							'/ws/quiz/' + roomName + '/');
+
+								chatSocket.onclose = function(e) {
+								console.error('Game socket closed unexpectedly');
+							};
+							chatSocket.onmessage = processMessage;
+					}
+					else{
+						alert("Incorrect code!")
+						openCodeForm();
 					}
 					}
 				});

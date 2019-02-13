@@ -31,6 +31,10 @@ def quiz_start(request, url, code):
         return render(request, '404.html')
 
 
+def quiz_player(request):
+    return render(request, 'game_screen.html')
+
+
 def validate_username(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
