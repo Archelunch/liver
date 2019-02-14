@@ -125,6 +125,13 @@
 				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
 				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 			};
+
+			function socketClose(e) {
+				console.error('Game socket closed unexpectedly');
+				chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
+				chatSocket.onmessage = processMessage;
+				chatSocket.onclose = socketClose;
+			}
 		
 			function openNameForm() {
 				code = document.getElementById('codeInput').value;
@@ -137,15 +144,10 @@
 					success: function (data) {
 					if (data['resp']==200) {
 						roomName = data['url'];
-						chatSocket = new WebSocket(
-							'wss://' + window.location.host +
-							'/ws/quiz/' + roomName + '/');
-
-								chatSocket.onclose = function(e) {
-								console.error('Game socket closed unexpectedly');
-							};
-							chatSocket.onmessage = processMessage;
-							main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
+						chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
+						chatSocket.onclose = socketClose;
+						chatSocket.onmessage = processMessage;
+						main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
 				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 					}
 					else{

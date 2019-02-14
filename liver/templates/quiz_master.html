@@ -81,9 +81,10 @@
             document.querySelector("#user_score").disabled = true;
         };
      };
-
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');
     };
+
+    login();
 </script>
 </html>
