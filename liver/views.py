@@ -4,7 +4,8 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 
-from quiz.models import Quiz, Category, Progress, Sitting, Question, QUser
+from quiz.models import Quiz, Category, Progress, Sitting, Question, QUser, QuizProgress
+from mcq.models import MCQQuestion, Answer
 
 # Create your views here.
 def quiz_start(request, url, code):
@@ -62,7 +63,7 @@ def validate_code(request):
 def leaderborad(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
-    username = int(request.GET.get('name', None))
+    username = int(request.GET.get('name', -100))
     users = QUser.objects.filter(quiz=quiz).order_by('-score')
     users_board = []
     user_in_list = False
@@ -76,7 +77,7 @@ def leaderborad(request):
         else:
             data['class'] = ''
         users_board.append(data)
-    if not user_in_list and username != None:
+    if not user_in_list and username != -100:
         user = QUser.objects.filter(id=username, quiz=quiz).first()
         user_personal = {'name':user.nickname, 'score':user.score, 'class':'user'}
         for ind, user_s in enumerate(users):
@@ -85,3 +86,52 @@ def leaderborad(request):
                 break
         return render(request, 'leaderboard.html', {'users':users_board, 'user_personal':user_personal})
     return render(request, 'leaderboard.html', {'users':users_board})
+
+
+def voter(request, url):
+    quiz = Quiz.objects.filter(url=url).first()
+    if quiz:
+        quiz_manager = QuizProgress.objects.new_sitting(quiz)
+        question = quiz_manager.get_first_question()
+        data = {
+        "question_id": question.id,
+        "questionText": str(question),
+        "answers": [str(ans) for ans in question.get_answers()],
+        "ids": [ans.id for ans in question.get_answers()],
+        "is_started" : int(quiz.is_started)
+        }
+        return render(request, 'voterka.html', data)
+    return render(request, '404.html')
+
+
+def vote(request):
+    question_id = request.GET.get('question_id', None)
+    answer_id = request.GET.get('answer_id', None)
+    question = MCQQuestion.objects.filter(id=question_id).first()
+    data = { 200 if question.check_if_correct(answer_id) else 500}
+    return JsonResponse(data)
+
+
+def voter_panel(request, url, code):
+    quiz = Quiz.objects.filter(url=url).first()
+    if quiz:
+        if "master" == code:
+            quiz.is_started = True
+            quiz.save()
+            if request.method == 'POST':
+                quiz.is_started = False
+                quiz.save()
+        elif "watcher" == code:
+            quiz_manager = QuizProgress.objects.new_sitting(quiz)
+            question = quiz_manager.get_first_question()
+            data = {
+            "question_id": question.id,
+            "questionText": str(question),
+            "answers": [str(ans) for ans in question.get_answers()],
+            "ids": [ans.id for ans in question.get_answers()],
+            "is_started" : int(quiz.is_started)
+            }
+            return render(request, 'watcher_voterka.html', data)
+        else:
+            return render(request, '403.html')
+    return render(request, '404.html')
