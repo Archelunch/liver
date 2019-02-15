@@ -55,7 +55,7 @@
 		<h2 class="header">{{questionText}}</h2>
 		<div class="center" id="main" style="top:95%">
 		<div class="stab"><div class="bottom" id="main">
-		{% for id, answer in answer.items %}
+		{% for id, answer in answers.items %}
 		<button class="btn btn1 answer" id="a_{{i}}" onclick="this.classList.add('chosen');sendAnswer(parseInt('{{id}}'), parseInt('{{question_id}}'))">{{answer}}</button>
 		{% endfor %}
 		</div></div>

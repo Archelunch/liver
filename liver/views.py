@@ -103,6 +103,7 @@ def voter(request, url):
         "is_started" : quiz.is_started,
         "range": range(len([str(ans) for ans in question.get_answers()]))
         }
+        print(data['answers'])
         return render(request, 'voterka.html', data)
     return render(request, '404.html')
 
