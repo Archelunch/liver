@@ -54,8 +54,8 @@
 		<h2 class="header">{{questionText}}</h2>
 		<div class="center" id="main">
 		<div class="stab"><div class="bottom" id="main">
-		{% for i in range %}
-		<button class="btn btn1 answer" disabled>{{answers.i}}</button>
+		{% for key, value in answers %}
+		<button class="btn btn1 answer" disabled>{{value}}</button>
 		{% endfor %}
 		</div></div>
 	</div>
