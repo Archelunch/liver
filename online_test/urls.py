@@ -21,7 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('favicon\.ico$', RedirectView.as_view(url='/static/favicons/favicon.ico'), name='favicon'),
+    path('favicon.ico', RedirectView.as_view(url='/static/favicons/favicon.ico'), name='favicon'),
     #path('', include('quiz.urls')),
     path('', include('liver.urls'))
 ] + staticfiles_urlpatterns()
