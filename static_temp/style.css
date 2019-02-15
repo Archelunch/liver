@@ -17,6 +17,10 @@ body.hands_simple {
 	background-image: url("./bg-simple.svg");
 }
 
+body.voter {
+	background-color: #000000;
+}
+
 .center {
 	position: absolute;
 	top: 50%;

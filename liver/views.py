@@ -122,6 +122,8 @@ def voter_panel(request, url, code):
             if request.method == 'POST':
                 quiz.is_started = False
                 quiz.save()
+                return render(request, 'master_voterka.html')
+            return render(request, 'master_voterka.html')
         elif "watcher" == code:
             quiz_manager = QuizProgress.objects.new_sitting(quiz)
             question = quiz_manager.get_first_question()

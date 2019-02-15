@@ -49,39 +49,10 @@
 	<link href='{% static "style.css" %}' rel="stylesheet">
 </head>
 <body class="voter">
-	<div id="gamezone">
-	<div class="center" id="main">
-		{% if is_started %}
-		<h2 class="header">{{questionText}}</h2>
-		<div class="stab"><div class="bottom" id="main">
-		{% for i in range %}
-		<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer(parseInt('{{ids.i}}'), parseInt('{{question_id}}'))">{{answers.i}}</button>
-		{% endfor %}
-		</div></div>
-		{% else %}
-		<h2 class="header">Ожидайте начала опроса</h2>
-		{% endif %}
-	</div>
+	<div class="center">
+        <form action="" method="post">
+        <input class="btn btn2" type="submit" value="Остановить">
+    </form>
 </div>
-	<script>
-			function sendAnswer(ind, question_id) {
-				$.ajax({
-					'url': '/api/vote',
-					'type': 'GET',
-					'data': {
-						'question_id':question_id,
-						'answer_id': ind
-					},
-					'success': (data) => {
-						let elems = document.getElementsByClassName("answer");
-				[...elems].forEach((elem) => {
-					elem.disabled = true;
-				});
-					}
-				});
-			}
-		
-		</script>
-		<script src='{% static "jquery-3.1.0.min.js" %}'></script>
 </body>
 </html>
