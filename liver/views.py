@@ -93,11 +93,13 @@ def voter(request, url):
     if quiz:
         quiz_manager = QuizProgress.objects.new_sitting(quiz)
         question = quiz_manager.get_first_question()
+        answer_list = question.get_answers()
         data = {
         "question_id": question.id,
         "questionText": str(question),
-        "answers": {ind:str(ans) for ind, ans in enumerate(question.get_answers())},
-        "ids": {ind:ans.id for ind, ans in enumerate(question.get_answers())},
+        "answers": {ans.id:str(ans) for ans in answer_list},
+        # "answers": {ind:str(ans) for ind, ans in enumerate(question.get_answers())},
+        # "ids": {ind:ans.id for ind, ans in enumerate(question.get_answers())},
         "is_started" : quiz.is_started,
         "range": range(len([str(ans) for ans in question.get_answers()]))
         }
