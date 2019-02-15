@@ -50,18 +50,19 @@
 </head>
 <body class="voter">
 	<div id="gamezone">
-	<div class="center" id="main">
+
 		{% if is_started %}
 		<h2 class="header">{{questionText}}</h2>
+		<div class="center" id="main">
 		<div class="stab"><div class="bottom" id="main">
 		{% for i in range %}
-		<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer(parseInt('{{ids.i}}'), parseInt('{{question_id}}'))">{{answers.i}}</button>
+		<button class="btn btn1 answer" id="a_{{i}}" onclick="this.classList.add('chosen');sendAnswer(parseInt('{{ids.i}}'), parseInt('{{question_id}}'))">{{answers.i}}</button>
 		{% endfor %}
 		</div></div>
+	</div>
 		{% else %}
 		<h2 class="header">Ожидайте начала опроса</h2>
 		{% endif %}
-	</div>
 </div>
 	<script>
 			function sendAnswer(ind, question_id) {
