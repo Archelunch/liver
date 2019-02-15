@@ -93,6 +93,7 @@ def voter(request, url):
     if quiz:
         quiz_manager = QuizProgress.objects.new_sitting(quiz)
         question = quiz_manager.get_first_question()
+        print([str(ans) for ans in question.get_answers()][0])
         data = {
         "question_id": question.id,
         "questionText": str(question),
