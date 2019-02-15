@@ -132,8 +132,8 @@ def voter_panel(request, url, code):
             data = {
             "question_id": question.id,
             "questionText": str(question),
-            "answers": {ind:str(ans) for ind, ans in enumerate(question.get_answers())},
-            "ids": {ind:ans.id for ind, ans in enumerate(question.get_answers())},
+            "answers": [str(ans) for ans in question.get_answers()],
+            "ids": [ans.id for ans in question.get_answers()],
             "is_started" : int(quiz.is_started),
             "range": range(len([str(ans) for ans in question.get_answers()]))
             }
