@@ -195,7 +195,7 @@ body.hands_simple {
 
 .result-bar-outer span {
 	position: absolute;
-	line-height: 16vw;
+	line-height: 8vw;
 	color: #ffffff;
 	word-wrap: break-word;
 }

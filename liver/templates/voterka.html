@@ -2,6 +2,48 @@
 <html>
 {% load static %}
 <head>
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+	ym(52394905, "init", {
+		 id:52394905,
+		 clickmap:true,
+		 trackLinks:true,
+		 accurateTrackBounce:true
+	});
+ </script>
+ <noscript><div><img src="https://mc.yandex.ru/watch/52394905" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+ <!-- /Yandex.Metrika counter -->
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134643068-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134643068-1');
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '1701043756875290');
+		fbq('track', 'PageView');
+	  </script>
+	  <noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=1701043756875290&ev=PageView&noscript=1"
+	  /></noscript>
+	  <!-- End Facebook Pixel Code -->
+	  <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?160",t.onload=function(){VK.Retargeting.Init("VK-RTRG-335322-e3qFt"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-335322-e3qFt" style="position:fixed; left:-999px;" alt=""/></noscript>	  
 	<link href='{% static "Montserrat.css" %}' rel="stylesheet">
 	<title>HandsApp</title>
 	<link href='{% static "style.css" %}' rel="stylesheet">
@@ -9,156 +51,36 @@
 <body class="hands">
 	<div id="gamezone">
 	<div class="center" id="main">
+		{% if is_started %}
+		<h2 class="header">{{questionText}}</h2>
+		<div class="stab"><div class="bottom" id="main">
+		{% for i in range %}
+		<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer({{ids[i]}}, {{question_id}})">{{answers[i]}}</button>
+		{% endfor %}
+		</div></div>
+		{% else %}
 		<h2 class="header">Ожидайте начала опроса</h2>
+		{% endif %}
 	</div>
 </div>
-<div id="footemail">
-	<a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
-</div>
 	<script>
-			let main = document.getElementById('main');
-			let gamezone = document.getElementById('gamezone');
-			let name, code, xhr, question_id;
-			var people_count=1;
-			let roomName, chatSocket;
-		
 			function sendAnswer(ind, question_id) {
-				chatSocket.send(JSON.stringify({message: "answer", name: name, answer: ind, question_id: question_id}));
-				let elems = document.getElementsByClassName("answer");
+				$.ajax({
+					'url': '/api/vote',
+					'type': 'GET',
+					'data': {
+						'question_id':question_id,
+						'answer_id': ind
+					},
+					'success': (data) => {
+						let elems = document.getElementsByClassName("answer");
 				[...elems].forEach((elem) => {
 					elem.disabled = true;
 				});
-			}
-		
-			function processResults() {
-				if (xhr.readyState != 4) return;
-				gamezone.innerHTML = xhr.responseText;
-			}
-		
-			function loadResults(d) {
-				console.log(name);
-				console.log(roomName);
-				$.ajax({
-					'url': '/leaderboard',
-					'type': 'GET',
-					'data': {
-						'name':name,
-						'url': roomName
-					},
-					'success': (data) => {
-						if (data.length >= 100) {
-							gamezone.innerHTML = data;
-						}
 					}
 				});
 			}
 		
-			function processMessage(d) {
-				let data = JSON.parse(d.data);
-				let newHTML;
-				if (data.message === 'question' && data.status === 'player') {
-					document.getElementById("footemail").style.visibility = "hidden";
-					newHTML = `
-						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
-						<h2 class="header">${data.questionText}</h2>
-						<div class="stab"><div class="bottom" id="main">`;
-					data.answers.forEach((answer, index) => {
-						newHTML += `<button class="btn btn1 answer" onclick="this.classList.add('chosen');sendAnswer(${data.ids[index]}, ${data.question_id})">${answer}</button>`;
-					});
-					newHTML += "</div></div>";
-					gamezone.innerHTML = newHTML;
-				} else if (data.message === 'question_results' && data.status === 'player') {
-					let stabilizer = document.getElementsByClassName('stab')[0];
-					newHTML = `<div class="bottom" id="main">`;
-					data.results.forEach((answer) => {
-						newHTML += `<div class="btn result-bar-outer">
-							<div class="result-bar-inner-${answer.right ? 1 : 2}" style="width: ${answer.percent}%"></div>
-							<span class="answer">${answer.text}</span>
-							<span class="percent">${answer.percent}%</span></div>`;
-					});
-					newHTML += "</div>";
-					stabilizer.innerHTML = newHTML;
-				} else if (data.message === 'results') {
-					document.getElementById("footemail").style.visibility = "visible";
-					newHTML = `<h2 class="header">Вы ответили правильно на ${data.correctAnswersCount} вопросов из ${data.questionCount}!</h2>
-						<img class="hands-low" src="./hands.svg" />
-						<div class="center">
-							<button class="btn btn2" id="resultsButton">Все результаты</button>
-						</div>`;
-						gamezone.innerHTML = newHTML;
-					document.getElementById('resultsButton').addEventListener('click', loadResults);
-				} else if (data.message === 'player_count') {
-					people_count = data.count;
-					var counter = document.getElementById("user-text");
-					if (counter) {
-						counter.innerHTML = `С вами уже играет ${people_count} человек`;
-					}
-					//gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
-				}
-			}
-		
-			function openWaitingScreen() {
-				name = document.getElementById('nameInput').value;
-				console.log(name)
-				$.ajax({
-					url: '/validate_username',
-					data: {
-					'username': name,
-					'url': roomName
-					},
-					dataType: 'json',
-					success: function (data) {
-					if (true) {
-						console.log("OK");
-						people_count = data['count']
-						name = data['user_id']
-					}
-					}
-				});
-
-				// document.body.className = "hands_simple"
-				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
-				chatSocket.send(JSON.stringify({message: "new_user", name: name}));
-			};
-		
-			function openCodeForm() {
-				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
-				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
-			};
-
-			function socketClose(e) {
-				console.error('Game socket closed unexpectedly');
-				chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
-				chatSocket.onmessage = processMessage;
-				chatSocket.onclose = socketClose;
-			}
-		
-			function openNameForm() {
-				code = document.getElementById('codeInput').value;
-				$.ajax({
-					url: '/validate_code',
-					data: {
-					'code': code
-					},
-					dataType: 'json',
-					success: function (data) {
-					if (data['resp']==200) {
-						roomName = data['url'];
-						chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
-						chatSocket.onclose = socketClose;
-						chatSocket.onmessage = processMessage;
-						main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
-				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
-					}
-					else{
-						alert("Incorrect code!")
-						openCodeForm();
-					}
-					}
-				});
-			};
-		
-			document.getElementById('mainButton').addEventListener('click', openCodeForm);
 		</script>
 		<script src='{% static "jquery-3.1.0.min.js" %}'></script>
 </body>
