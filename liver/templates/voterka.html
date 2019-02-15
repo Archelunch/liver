@@ -56,6 +56,7 @@
 		<div class="center" id="main">
 		<div class="stab"><div class="bottom" id="main">
 		{% for i in range %}
+		{{ids.i}} {{answers.i}}
 		<button class="btn btn1 answer" id="a_{{i}}" onclick="this.classList.add('chosen');sendAnswer(parseInt('{{ids.i}}'), parseInt('{{question_id}}'))">{{answers.i}}</button>
 		{% endfor %}
 		</div></div>
