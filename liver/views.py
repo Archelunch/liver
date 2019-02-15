@@ -134,7 +134,7 @@ def voter_panel(request, url, code):
             "questionText": str(question),
             "answers": [str(ans) for ans in question.get_answers()],
             "ids": [ans.id for ans in question.get_answers()],
-            "is_started" : int(quiz.is_started)
+            "is_started" : int(quiz.is_started),
             "range": range(len([str(ans) for ans in question.get_answers()]))
             }
             return render(request, 'watcher_voterka.html', data)
