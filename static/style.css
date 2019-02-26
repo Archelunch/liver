@@ -17,6 +17,10 @@ body.hands_simple {
 	background-image: url("./bg-simple.svg");
 }
 
+body.voter {
+	background-color: #000000;
+}
+
 .center {
 	position: absolute;
 	top: 50%;
@@ -50,7 +54,7 @@ body.hands_simple {
 	border: none;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
-	font-size: 4vw;
+	font-size: 2vw;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
@@ -59,7 +63,7 @@ body.hands_simple {
 	width: 50vw;
 	background-color: #D62ED8;
 	color: #ffffff;
-	font-size: 6vw;
+	font-size: 2vw;
 	font-weight: 700;
 }
 
@@ -130,7 +134,7 @@ body.hands_simple {
 	height: 12vw;
 	border-radius: 6vw;
 	width: 54vw;
-	font-size: 4vw;
+	font-size: 2vw;
 	padding-left: 6vw;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
