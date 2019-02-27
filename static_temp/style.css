@@ -206,6 +206,7 @@ body.voter {
 
 .answer {
 	left: 8vw;
+	max-width: 300px;
 }
 
 .percent {
@@ -383,6 +384,7 @@ body.voter {
 	.answer {
 		left: 3vw;
 		word-wrap: break-word;
+		max-width: 300px;
 	}
 
 	.percent {
