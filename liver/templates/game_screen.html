@@ -66,7 +66,7 @@
 		
 			function sendAnswer(ind, question_id) {
 				chatSocket.send(JSON.stringify({message: "answer", name: name, answer: ind, question_id: question_id}));
-				let elems = document.getElementsByClassName("answer");
+				let elems = document.getElementsByClassName("btn1");
 				[...elems].forEach((elem) => {
 					elem.disabled = true;
 				});
