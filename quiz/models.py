@@ -57,6 +57,8 @@ class Quiz(models.Model):
 
     master_code = models.TextField(verbose_name=_("Master code"), blank=True)
 
+    question_time = models.IntegerField(verbose_name=_("Time for answer"), default=30)
+
     url = models.SlugField(
         max_length=60, blank=False,
         help_text=_("a user friendly url"),
@@ -170,6 +172,8 @@ class QUser(models.Model):
                                     verbose_name=_("User Answers"))
     is_online = models.BooleanField(default=False, blank=False,
                                    verbose_name=_("Is he taking part now?"))
+
+    answer_time = models.IntegerField(verbose_name=_("User's time"), default=0)
 
     @property
     def get_score(self):
