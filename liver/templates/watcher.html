@@ -57,6 +57,7 @@
         <div id="footemail">
             <a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
         </div>
+        <h2 id="timer"></h2>
     </body>
     <script>
         var status_start = "{{quiz_object.is_started}}";
@@ -68,10 +69,25 @@
         var chatSocket = new WebSocket(
             'wss://' + window.location.host +
             '/ws/quiz/' + roomName + '/');
+        let currentTime = 30;
+        let timerInterval = null;
 
         chatSocket.onclose = function(e) {
             console.error('Game socket closed unexpectedly');
         };
+
+        function timer() {
+            document.getElementById("timer").innerHTML = currentTime;
+            currentTime -= 1;
+            if (currentTime === -1) {
+                clear(true);
+            }
+        }
+
+        function clear() {
+            document.getElementById("timer").innerHTML = "";
+            clearInterval(timerInterval);
+        }
     
         function processResults() {
             if (xhr.readyState != 4) return;
@@ -109,7 +125,10 @@
                 });
                 newHTML += "</div></div>";
                 gamezone.innerHTML = newHTML;
+                currentTime = 30;
+                timerInterval = setInterval(timer, 1000);
             } else if (data.message === 'question_results') {
+                clear();
                 let stabilizer = document.getElementsByClassName('stab')[0];
                 newHTML = `<div class="bottom" id="main">`;
                 data.results.forEach((answer) => {
