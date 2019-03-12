@@ -179,7 +179,12 @@ class QUser(models.Model):
     def get_score(self):
         return self.score
 
-    
+
+    def add_time(self, time):
+        self.answer_time += int(time)
+        self.save()
+
+
     def add_to_score(self, points):
         self.score += int(points)
         self.save()

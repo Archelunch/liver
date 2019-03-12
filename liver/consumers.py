@@ -103,6 +103,7 @@ class QuizConsumer(AsyncWebsocketConsumer):
                 self.quser = QUser.objects.filter(id=text_data_json['name'], quiz=self.quiz).first()
                 question = MCQQuestion.objects.filter(id=text_data_json['question_id']).first()
                 self.is_correct = question.check_if_correct(text_data_json['answer'])
+                self.quser.add_time(text_data_json['time'])
                 if self.is_correct is True:
                     self.quser.add_to_score(1)
                 self.quser.add_user_answer(question, text_data_json['answer'])

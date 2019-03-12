@@ -64,7 +64,7 @@ def leaderborad(request):
     url = request.GET.get('url', None)
     quiz = Quiz.objects.filter(url=url).first()
     username = int(request.GET.get('name', -100))
-    users = QUser.objects.filter(quiz=quiz).order_by('-score')
+    users = QUser.objects.filter(quiz=quiz).order_by('-score', 'answer_time')
     users_board = []
     user_in_list = False
     for ind, user in enumerate(users[:10]):
