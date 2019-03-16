@@ -64,7 +64,7 @@
 			let name, code, xhr, question_id;
 			var people_count=1;
 			let roomName, chatSocket;
-			let currentTime = 30;
+			let currentTime = 15;
 			let timerInterval = null;
 			let spent = 0;
 			let hiddenInterval = null;
@@ -124,7 +124,7 @@
 				let data = JSON.parse(d.data);
 				let newHTML;
 				if (data.message === 'question') {
-					currentTime = 30;
+					currentTime = 15;
 					timerInterval = setInterval(timer, 1000);
 					spent = 0;
 				} else {

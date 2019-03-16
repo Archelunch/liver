@@ -69,7 +69,7 @@
         var chatSocket = new WebSocket(
             'wss://' + window.location.host +
             '/ws/quiz/' + roomName + '/');
-        let currentTime = 30;
+        let currentTime = 15;
         let timerInterval = null;
 
         chatSocket.onclose = function(e) {
@@ -125,7 +125,7 @@
                 });
                 newHTML += "</div></div>";
                 gamezone.innerHTML = newHTML;
-                currentTime = 30;
+                currentTime = 15;
                 timerInterval = setInterval(timer, 1000);
             } else if (data.message === 'question_results') {
                 clear();

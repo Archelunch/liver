@@ -67,7 +67,7 @@
     var chatSocket = new WebSocket(
         'wss://' + window.location.host +
         '/ws/quiz/' + roomName + '/');
-    let currentTime = 30;
+    let currentTime = 15;
     let timerInterval = null;
 
     function timer() {
@@ -112,7 +112,7 @@
             document.querySelector("#question-results").classList.remove("disabled");
             document.querySelector("#question").disabled = true;
             document.querySelector("#question-results").disabled = false;
-            currentTime = 30;
+            currentTime = 15;
             timerInterval = setInterval(timer, 1000);
         };
         document.querySelector('#question-results').onclick = function(e) {
