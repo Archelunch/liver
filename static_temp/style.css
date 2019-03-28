@@ -63,7 +63,7 @@ body.voter {
 	width: 50vw;
 	background-color: #D62ED8;
 	color: #ffffff;
-	font-size: 2vw;
+	font-size: 4vw;
 	font-weight: 700;
 }
 
@@ -134,7 +134,7 @@ body.voter {
 	height: 12vw;
 	border-radius: 6vw;
 	width: 54vw;
-	font-size: 2vw;
+	font-size: 4vw;
 	padding-left: 6vw;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
@@ -302,7 +302,7 @@ body.voter {
 	.btn-main {
 		width: 16vw;
 		height: 6vw;
-		font-size: 4vw;
+		font-size: 2vw;
 	}
 
 	.input-holder {
