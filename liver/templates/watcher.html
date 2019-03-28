@@ -69,7 +69,7 @@
         var chatSocket = new WebSocket(
             'wss://' + window.location.host +
             '/ws/quiz/' + roomName + '/');
-        let currentTime = 15;
+        let currentTime = {{quiz.question_time}};
         let timerInterval = null;
 
         chatSocket.onclose = function(e) {

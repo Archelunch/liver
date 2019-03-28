@@ -57,7 +57,7 @@ class Quiz(models.Model):
 
     master_code = models.TextField(verbose_name=_("Master code"), blank=True)
 
-    question_time = models.IntegerField(verbose_name=_("Time for answer"), default=30)
+    question_time = models.IntegerField(verbose_name=_("Time for answer"), default=15)
 
     url = models.SlugField(
         max_length=60, blank=False,
