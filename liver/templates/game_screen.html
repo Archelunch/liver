@@ -196,7 +196,7 @@
 			};
 		
 			function openCodeForm() {
-				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" required/><button type="button" id="codeFormButton"></button></div>';
+				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
 				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 			};
 
@@ -216,13 +216,13 @@
 					},
 					dataType: 'json',
 					success: function (data) {
-					if (data['resp']==200) {
+					if (data['resp']==200 && code != '') {
 						roomName = data['url'];
 						currentTime = data['timer'];
 						chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
 						chatSocket.onclose = socketClose;
 						chatSocket.onmessage = processMessage;
-						main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" required placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
+						main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
 				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 					}
 					else{
