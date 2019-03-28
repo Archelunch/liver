@@ -64,7 +64,7 @@
 			let name, code, xhr, question_id;
 			var people_count=1;
 			let roomName, chatSocket;
-			let currentTime = {{quiz.question_time}};
+			let currentTime = 15;
 			let timerInterval = null;
 			let spent = 0;
 			let hiddenInterval = null;
@@ -218,6 +218,7 @@
 					success: function (data) {
 					if (data['resp']==200) {
 						roomName = data['url'];
+						currentTime = data['timer'];
 						chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
 						chatSocket.onclose = socketClose;
 						chatSocket.onmessage = processMessage;

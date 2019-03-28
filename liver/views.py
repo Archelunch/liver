@@ -55,7 +55,8 @@ def validate_code(request):
     quiz = Quiz.objects.filter(user_code=code).first()
     data = {
         'resp': 200 if quiz else 404,
-        'url': quiz.url if quiz else 404
+        'url': quiz.url if quiz else 404,
+        'timer': quiz.question_time if quiz else 15,
     }
     return JsonResponse(data)
 
