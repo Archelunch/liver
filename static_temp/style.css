@@ -158,12 +158,8 @@ body.voter {
 	width: 100%;
 }
 
-.c-test p {
+.c-test textarea {
 	color: #6D449A;
-	left: 5%;
-	top: 5%;
-	font-size: 30px;
-	max-width: 80%;
 }
 
 .back {
@@ -217,6 +213,19 @@ body.voter {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-image: url("./trash.png");
+}
+
+.removeAnswer {
+	position: absolute;
+	background-color: transparent;
+	border:none;
+	height: 100%;
+	width: 5vw;
+	right: 5vw;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url("./x.png");
 }
 
 .btn-round {
@@ -340,6 +349,15 @@ body.voter {
 
 .btn4:active, .btn4.disabled {
 	background-color: #9B009D;
+}
+
+.overlay {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: rgba(144, 69, 225, 0.6)
 }
 
 .input-holder, .input-holder-full {
@@ -551,6 +569,21 @@ body.voter {
 	padding-left: 8vw;
 	color: #ffffff;
 	box-shadow: 0 10px 0 0 #6630A0;
+}
+
+textarea {
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 70%;
+	height: 70%;
+	transform: translate(-50%, -50%);
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	font-size: 3vw;
+	color: #ffffff;
 }
 
 @media screen and (min-width: 1200px) {

@@ -20,21 +20,22 @@
 			<div class="row">
 				<div class="col-12">
 					<h2 class="editor-header">1/...</h2>
-					<div class="editor-question">
+					<div class="editor-question" id="question" onclick="changeToTextArea(this.id);">
 						<p>Впишите текст вопроса</p>
 					</div>
-					<div class="editor-answer">
+					<div class="editor-answer" id="answer1" onclick="changeToTextArea(this.id, true);">
 						<p>Вариант ответа</p>
 					</div>
-					<div class="editor-answer">
+					<div class="editor-answer" id="answer2" onclick="changeToTextArea(this.id, true);">
 						<p>Вариант ответа</p>
 					</div>
-					<div class="editor-answer">
+					<div class="editor-answer" id="answer3" onclick="changeToTextArea(this.id, true);">
 						<p>Вариант ответа</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		<button class="btn-round"></button>
+		<script src="./app.js"></script>
 	</body>
 </html>
