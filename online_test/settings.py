@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'mcq',
     'quiz',
     'liver',
+    'adminka',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
