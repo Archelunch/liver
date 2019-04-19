@@ -1,65 +1,33 @@
-<!DOCTYPE html>
-<html>
-{% load static %}
-<head>
-	<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-	(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-	m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- 
-	ym(52394905, "init", {
-		 id:52394905,
-		 clickmap:true,
-		 trackLinks:true,
-		 accurateTrackBounce:true
-	});
- </script>
- <noscript><div><img src="https://mc.yandex.ru/watch/52394905" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
- <!-- /Yandex.Metrika counter -->
- <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134643068-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+'use strict';
 
-  gtag('config', 'UA-134643068-1');
-</script>
-<!-- Facebook Pixel Code -->
-<script>
-		!function(f,b,e,v,n,t,s)
-		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-		n.queue=[];t=b.createElement(e);t.async=!0;
-		t.src=v;s=b.getElementsByTagName(e)[0];
-		s.parentNode.insertBefore(t,s)}(window, document,'script',
-		'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '1701043756875290');
-		fbq('track', 'PageView');
-	  </script>
-	  <noscript><img height="1" width="1" style="display:none"
-		src="https://www.facebook.com/tr?id=1701043756875290&ev=PageView&noscript=1"
-	  /></noscript>
-	  <!-- End Facebook Pixel Code -->
-	  <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?160",t.onload=function(){VK.Retargeting.Init("VK-RTRG-335322-e3qFt"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-335322-e3qFt" style="position:fixed; left:-999px;" alt=""/></noscript>	  
-	<link href='{% static "Montserrat.css" %}' rel="stylesheet">
-	<title>HandsApp</title>
-	<link href='{% static "style.css" %}' rel="stylesheet">
-</head>
-<body class="hands">
-	<div id="gamezone">
-		<div class="center" id="main">
-			<button class="btn btn-main center" id="mainButton">HANDSAPP</button>
-		</div>
-	</div>
-	<div id="footemail">
-		<a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
-	</div>
-	<h2 id="timer"></h2>
-	<script>
-			let main = document.getElementById('main');
+function changeToTextArea(elementId, is_answer=false) {
+	let element = document.getElementById(elementId);
+	element.onclick = "";
+	element.style.backgroundImage = "none";
+	if (!is_answer) {
+		element.innerHTML = "<textarea>Текст вопроса</textarea>";
+	} else {
+		element.style.borderRadius = "5vh";
+		element.innerHTML = "<textarea>Текст ответа</textarea><button class='removeAnswer' onclick='changeToPrompt(this.parentNode.id);'></button>";
+	}
+}
+
+function changeToPrompt(elementId) {
+	let element = document.getElementById(elementId);
+	element.style.backgroundImage = "url('./plus.png')";
+	element.style.borderRadius = "1vw";
+	element.innerHTML = "<p>Вариант ответа</p>";
+	element.onclick = () => {
+		changeToTextArea(this.id, true);
+	};
+}
+
+function addTest() {
+	let element = document.getElementsByClassName("row")[0];
+	element.innerHTML = '<div class="col-6"><div class="dummy"></div><div class="c c-test m-3"><button class="delete-btn"></button><textarea>Текст</textarea></div></div>' + element.innerHTML;
+}
+
+let main = document.getElementById('main');
 			let gamezone = document.getElementById('gamezone');
 			let name, code, xhr, question_id;
 			var people_count=1;
@@ -196,6 +164,7 @@
 			};
 		
 			function openCodeForm() {
+				let main = document.getElementById("main");
 				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
 				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 			};
@@ -233,8 +202,4 @@
 				});
 			};
 		
-			document.getElementById('mainButton').addEventListener('click', openCodeForm);
-		</script>
-		<script src='{% static "jquery-3.1.0.min.js" %}'></script>
-</body>
-</html>
+window.onload = () => {document.getElementById('mainButton').addEventListener('click', openCodeForm)};
