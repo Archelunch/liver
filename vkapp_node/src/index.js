@@ -7,6 +7,7 @@ import {createHashHistory} from 'history';
 import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './store/reducers';
+import {Fetch} from 'react-request';
 import registerServiceWorker from './registerServiceWorker';
 import App from './containers/App';
 

@@ -179,7 +179,7 @@ function socketClose(e) {
 function openNameForm() {
 	code = document.getElementById('codeInput').value;
 	$.ajax({
-		url: '/validate_code',
+		url: 'http://localhost:8000/validate_code',
 		data: {
 			'code': code
 		},
