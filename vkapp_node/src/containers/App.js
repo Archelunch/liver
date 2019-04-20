@@ -5,7 +5,7 @@ import {isWebView} from '@vkontakte/vkui/src/lib/webview';
 import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import AboutPanel from './AboutPanel';
-import MainPanel from './MainPanel';
+import MainScreen from './MainScreen';
 
 class App extends Component {
 
@@ -15,13 +15,13 @@ class App extends Component {
     }
 
     render() {
-        let activePanel = this.props.pageId === 'about' ? 'aboutPanel' : 'mainPanel';
+        let activePanel = this.props.pageId === 'about' ? 'aboutPanel' : 'mainScreen';
 
         return (
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
                 <UI.Root activeView="mainView">
                     <UI.View id="mainView" activePanel={activePanel}>
-                        <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
+                        <MainScreen id="mainScreen" accessToken={this.props.accessToken}/>
                         <AboutPanel id="aboutPanel"/>
                     </UI.View>
                 </UI.Root>

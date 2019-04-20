@@ -8,12 +8,12 @@ class MainPanel extends Component {
         return (
             <div style={{width: "100vw", height: "100vh"}}>
             <div id="gamezone">
-    <div class="center" id="main">
-      <button class="btn btn-main center" id="mainButton">HANDSAPP</button>
+    <div className="center" id="main">
+      <button className="btn btn-main center" id="mainButton">HANDSAPP</button>
     </div>
   </div>
   <div id="footemail">
-    <a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
+    <a href="mailto:info@handsapp.fun" target="_top" className="footer">info@handsapp.fun</a>
   </div>
   <h2 id="timer"></h2></div>
         );
