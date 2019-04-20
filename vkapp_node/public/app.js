@@ -1,5 +1,7 @@
 'use strict';
 
+let address = "192.168.1.71"
+
 function changeToTextArea(elementId, is_answer=false) {
 	let element = document.getElementById(elementId);
 	element.onclick = "";
@@ -74,7 +76,7 @@ function loadResults(d) {
 	console.log(name);
 	console.log(roomName);
 	$.ajax({
-		'url': '/leaderboard',
+		'url': 'http://' + address + '/leaderboard',
 		'type': 'GET',
 		'data': {
 			'name':name,
@@ -143,7 +145,7 @@ function openWaitingScreen() {
 	name = document.getElementById('nameInput').value;
 	console.log(name)
 	$.ajax({
-		url: '/validate_username',
+		url: 'http://' + address + '/validate_username',
 		data: {
 			'username': name,
 			'url': roomName
@@ -171,7 +173,7 @@ function openCodeForm() {
 
 function socketClose(e) {
 	console.error('Game socket closed unexpectedly');
-	chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
+	chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 	chatSocket.onmessage = processMessage;
 	chatSocket.onclose = socketClose;
 }
@@ -179,7 +181,7 @@ function socketClose(e) {
 function openNameForm() {
 	code = document.getElementById('codeInput').value;
 	$.ajax({
-		url: 'http://localhost:8000/validate_code',
+		url: 'http://'+ address + ':8000/validate_code',
 		data: {
 			'code': code
 		},
