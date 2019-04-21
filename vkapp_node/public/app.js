@@ -70,6 +70,7 @@ function sendAnswer(ind, question_id) {
 		
 function processResults() {
 	if (xhr.readyState != 4) return;
+	gamezone = document.getElementById('gamezone');
 	gamezone.innerHTML = xhr.responseText;
 }
 		
@@ -85,6 +86,7 @@ function loadResults(d) {
 		},
 		'success': (data) => {
 			if (data.length >= 100) {
+				gamezone = document.getElementById('gamezone');
 				gamezone.innerHTML = data;
 			}
 		}
@@ -92,6 +94,7 @@ function loadResults(d) {
 }
 		
 function processMessage(d) {
+	gamezone = document.getElementById('gamezone');
 	let data = JSON.parse(d.data);
 	let newHTML;
 	if (data.message === 'question') {
@@ -162,6 +165,7 @@ function openWaitingScreen() {
 	});
 
 	// document.body.className = "hands_simple"
+	gamezone =document.getElementById('gamezone');
 	gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
 	chatSocket.send(JSON.stringify({message: "new_user", name: name}));
 };
@@ -189,6 +193,7 @@ function openNameForm() {
 		dataType: 'json',
 		success: function (data) {
 			if (data['resp']==200 && code != '') {
+				main = document.getElementById('main');
 				roomName = data['url'];
 				currentTime = data['timer'];
 				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
@@ -203,3 +208,9 @@ function openNameForm() {
 		}
 	});
 };
+
+
+window.onload = () => {
+	main = document.getElementById('main');
+	gamezone = document.getElementById('gamezone');
+}
