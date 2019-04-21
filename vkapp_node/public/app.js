@@ -1,6 +1,7 @@
 'use strict';
 
-let address = "192.168.1.71"
+//let address = "192.168.1.5"
+let address = "handsapp.fun"
 
 function changeToTextArea(elementId, is_answer=false) {
 	let element = document.getElementById(elementId);
@@ -76,7 +77,7 @@ function loadResults(d) {
 	console.log(name);
 	console.log(roomName);
 	$.ajax({
-		'url': 'http://' + address + '/leaderboard',
+		'url': 'https://' + address + '/leaderboard',
 		'type': 'GET',
 		'data': {
 			'name':name,
@@ -145,7 +146,7 @@ function openWaitingScreen() {
 	name = document.getElementById('nameInput').value;
 	console.log(name)
 	$.ajax({
-		url: 'http://' + address + '/validate_username',
+		url: 'https://' + address + '/validate_username',
 		data: {
 			'username': name,
 			'url': roomName
@@ -181,7 +182,7 @@ function socketClose(e) {
 function openNameForm() {
 	code = document.getElementById('codeInput').value;
 	$.ajax({
-		url: 'http://'+ address + ':8000/validate_code',
+		url: 'https://'+ address + '/validate_code',
 		data: {
 			'code': code
 		},
@@ -190,7 +191,7 @@ function openNameForm() {
 			if (data['resp']==200 && code != '') {
 				roomName = data['url'];
 				currentTime = data['timer'];
-				chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
+				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 				chatSocket.onclose = socketClose;
 				chatSocket.onmessage = processMessage;
 				main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
