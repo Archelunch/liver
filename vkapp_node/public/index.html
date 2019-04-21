@@ -50,8 +50,13 @@
 <body class="hands">
   <div id="root">
   </div>
+  <button class="backbtn" id="backbtn" onclick="window.location.reload();">Назад</button>
   <script src="/jquery-3.1.0.min.js"></script>
   <script src="/app.js"></script>
-  <script>window.onload = () => {document.getElementById('mainButton').addEventListener('click', openCodeForm)};</script>
+  <script>window.onload = () => {
+    document.getElementById('mainButton').addEventListener('click', openCodeForm);
+    document.getElementById('mainButton').addEventListener('click', () => {
+      document.getElementById('backbtn').style.display = "block";
+    })};</script>
 </body>
 </html>

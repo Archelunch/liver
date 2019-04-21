@@ -692,9 +692,26 @@ textarea {
 
 #timer {
 	position: absolute;
-	top: 0;
-	right: 0;
-	padding-right: 50px;
-	font-size: 50px;
-	color: #ffffff;
+    top: 0;
+    padding-right: 50px;
+    font-size: 5vw;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.backbtn {
+	position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background-color: #9045E1;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    width: 20vw;
+    height: 6vw;
+    font-size: 3vw;
+    border: none;
+	border-radius: 3vw;
+	display: none;
 }
