@@ -195,5 +195,5 @@ function openWaitingScreen() {
 window.onload = () => {
 	main = document.getElementById('main');
 	gamezone = document.getElementById('gamezone');
-	user_id = document.getElementById('userid');
+	name = document.getElementById('userid').innerHTML;
 }
