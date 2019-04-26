@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -53,7 +55,14 @@
   <button class="backbtn" id="backbtn" onclick="window.location.reload();">Назад</button>
   <script src="/jquery-3.1.0.min.js"></script>
   <script src="/app.js"></script>
-  <script>window.onload = () => {
+  <script>
+    // disable scrolling
+    $(document).bind('touchmove', function(e) {
+      e.preventDefault();
+    });
+
+    // after load things
+    window.onload = () => {
     document.getElementById('mainButton').addEventListener('click', openCodeForm);
     document.getElementById('mainButton').addEventListener('click', () => {
       document.getElementById('backbtn').style.display = "block";

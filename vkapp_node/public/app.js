@@ -3,6 +3,13 @@
 //let address = "192.168.1.5"
 let address = "handsapp.fun"
 
+let name, code, xhr, question_id, main, gamezone, user_id, roomName, chatSocket;
+let people_count = 1;
+let currentTime = 15;
+let timerInterval = null;
+let spent = 0;
+let hiddenInterval = null;
+
 function changeToTextArea(elementId, is_answer=false) {
 	let element = document.getElementById(elementId);
 	element.onclick = "";
@@ -29,16 +36,6 @@ function addTest() {
 	let element = document.getElementsByClassName("row")[0];
 	element.innerHTML = '<div class="col-6"><div class="dummy"></div><div class="c c-test m-3"><button class="delete-btn"></button><textarea>Текст</textarea></div></div>' + element.innerHTML;
 }
-
-let main = document.getElementById('main');
-let gamezone = document.getElementById('gamezone');
-let name, code, xhr, question_id;
-var people_count=1;
-let roomName, chatSocket;
-let currentTime = 15;
-let timerInterval = null;
-let spent = 0;
-let hiddenInterval = null;
 
 function timer() {
 	document.getElementById("timer").innerHTML = currentTime;
@@ -142,34 +139,10 @@ function processMessage(d) {
 	}
 }
 		
-function openWaitingScreen() {
-	name = document.getElementById('nameInput').value;
-	console.log(name)
-	$.ajax({
-		url: 'https://' + address + '/validate_username',
-		data: {
-			'username': name,
-			'url': roomName
-		},
-		dataType: 'json',
-		success: function (data) {
-			if (true) {
-			console.log("OK");
-			people_count = data['count']
-			name = data['user_id']
-			}
-		}
-	});
-
-	gamezone =document.getElementById('gamezone');
-	gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
-	chatSocket.send(JSON.stringify({message: "new_user", name: name}));
-};
-		
 function openCodeForm() {
 	let main = document.getElementById("main");
 	main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
-	document.getElementById('codeFormButton').addEventListener('click', openNameForm);
+	document.getElementById('codeFormButton').addEventListener('click', openWaitingScreen);
 };
 
 function socketClose(e) {
@@ -179,7 +152,7 @@ function socketClose(e) {
 	chatSocket.onclose = socketClose;
 }
 		
-function openNameForm() {
+function openWaitingScreen() {
 	code = document.getElementById('codeInput').value;
 	$.ajax({
 		url: 'https://'+ address + '/validate_code',
@@ -189,14 +162,27 @@ function openNameForm() {
 		dataType: 'json',
 		success: function (data) {
 			if (data['resp']==200 && code != '') {
-				main = document.getElementById('main');
 				roomName = data['url'];
 				currentTime = data['timer'];
 				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 				chatSocket.onclose = socketClose;
 				chatSocket.onmessage = processMessage;
-				main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
-				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
+				$.ajax({
+					url: 'https://' + address + '/validate_username',
+					data: {
+						'username': name,
+						'url': roomName
+					},
+					dataType: 'json',
+					success: function (data) {
+						if (true) {
+							people_count = data['count']
+							name = data['user_id']
+						}
+					}
+				});
+				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
+				chatSocket.send(JSON.stringify({message: "new_user", name: name}));
 			} else {
 				alert("Incorrect code!")
 				openCodeForm();
@@ -209,4 +195,5 @@ function openNameForm() {
 window.onload = () => {
 	main = document.getElementById('main');
 	gamezone = document.getElementById('gamezone');
+	user_id = document.getElementById('userid');
 }
