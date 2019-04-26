@@ -127,7 +127,6 @@ function processMessage(d) {
 		newHTML += "</div>";
 		stabilizer.innerHTML = newHTML;
 	} else if (data.message === 'results') {
-		//document.getElementById("footemail").style.visibility = "visible";
 		newHTML = `<h2 class="header">Вы ответили правильно на ${data.correctAnswersCount} вопросов из ${data.questionCount}!</h2>
 		<div class="center">
 		<button class="btn btn2" id="resultsButton">Все результаты</button>
@@ -140,7 +139,6 @@ function processMessage(d) {
 		if (counter) {
 			counter.innerHTML = `С вами уже играет ${people_count} человек`;
 		}
-		//gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text">С вами уже играет ${people_count} человек</p>`;
 	}
 }
 		
@@ -163,7 +161,6 @@ function openWaitingScreen() {
 		}
 	});
 
-	// document.body.className = "hands_simple"
 	gamezone =document.getElementById('gamezone');
 	gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
 	chatSocket.send(JSON.stringify({message: "new_user", name: name}));
