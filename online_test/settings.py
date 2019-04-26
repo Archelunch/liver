@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'q^n4^0*8v2f9%qs$+hg7l0g!-461fja26bzq=cwp)y3u&k6i8&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['handsapp.fun', '178.128.238.208', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['handsapp.fun', '178.128.238.208', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['handsapp.fun', '178.128.238.208', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     "sslserver",
     'channels',
+    'corsheaders',
     'mcq',
     'quiz',
     'liver',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -144,3 +146,5 @@ CHANNEL_LAYERS = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ("*",)
+CORS_ORIGIN_REGEX_WHITELIST = ("*",)
