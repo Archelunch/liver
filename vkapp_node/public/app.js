@@ -170,7 +170,7 @@ function openWaitingScreen() {
 				$.ajax({
 					url: 'https://' + address + '/validate_username',
 					data: {
-						'username': name,
+						'username': user_id,
 						'url': roomName
 					},
 					dataType: 'json',
@@ -195,5 +195,5 @@ function openWaitingScreen() {
 window.onload = () => {
 	main = document.getElementById('main');
 	gamezone = document.getElementById('gamezone');
-	user_id = document.getElementById('userid');
+	name = document.getElementById('userid').innerHTML;
 }
