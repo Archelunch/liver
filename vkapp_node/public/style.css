@@ -471,7 +471,7 @@ body.voter {
 	display:block;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
-	font-size: 6vw;
+	font-size: 80px;
 	color: white;
 	margin: 8vw;
 	margin-bottom: 10px;
@@ -487,7 +487,7 @@ body.voter {
 .simple-text {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
-	font-size: 4vw;
+	font-size: 60px;
 	color: white;
 	margin: 8vw;
 }
@@ -536,10 +536,12 @@ body.voter {
 }
 
 .name {
-	width: 63vw;
+	width: 60vw;
 }
 
 .score {
+	position: relative;
+	right: 0;
 	width: 8vw;
 	text-align: center;
 }
@@ -631,12 +633,14 @@ textarea {
 		margin: 0;
 		padding: 2vw 8vw;
 		margin-bottom: 10px;
+		text-align: center;
 	}
 
 	.simple-text {
 		font-size: 3vw;
 		margin: 0;
 		padding: 1vw 8vw;
+		text-align: center;
 	}
 
 	.bottom {
@@ -702,16 +706,18 @@ textarea {
 }
 
 .backbtn {
-	position: fixed;
-    left: 20px;
-    bottom: 20px;
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
     background-color: #9045E1;
+    box-shadow: 0 10px 0 0 #6630A0;
     font-family: 'Montserrat', sans-serif;
     color: #ffffff;
-    width: 20vw;
-    height: 6vw;
+    width: 40vw;
+    height: 10vw;
     font-size: 3vw;
     border: none;
-	border-radius: 3vw;
+	border-radius: 5vw;
 	display: none;
 }
