@@ -2,7 +2,7 @@
   "name": "handsapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Archelunch/liver",
+  "homepage": "https://handsapp.fun:3000",
   "dependencies": {
     "@vkontakte/vkui": "^2.5.8",
     "@vkontakte/vkui-connect": "^1.0.0",
