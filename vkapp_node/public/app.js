@@ -142,7 +142,7 @@ function processMessage(d) {
 function openCodeForm() {
 	let main = document.getElementById("main");
 	main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
-	document.getElementById('codeFormButton').addEventListener('click', openWaitingScreen);
+	document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 };
 
 function socketClose(e) {
@@ -151,8 +151,32 @@ function socketClose(e) {
 	chatSocket.onmessage = processMessage;
 	chatSocket.onclose = socketClose;
 }
-		
-function openWaitingScreen() {
+
+function openWaitingScreen() {	
+	name = document.getElementById('nameInput').value;	
+	console.log(name)	
+	$.ajax({	
+		url: 'https://' + address + '/validate_username',	
+		data: {	
+			'username': name,	
+			'url': roomName	
+		},	
+		dataType: 'json',	
+		success: function (data) {	
+			if (true) {	
+			console.log("OK");	
+			people_count = data['count']	
+			name = data['user_id']	
+			}	
+		}	
+	});	
+
+ 	gamezone =document.getElementById('gamezone');	
+	gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;	
+	chatSocket.send(JSON.stringify({message: "new_user", name: name}));	
+};
+
+function openNameForm() {
 	code = document.getElementById('codeInput').value;
 	$.ajax({
 		url: 'https://'+ address + '/validate_code',
@@ -162,27 +186,14 @@ function openWaitingScreen() {
 		dataType: 'json',
 		success: function (data) {
 			if (data['resp']==200 && code != '') {
+				main = document.getElementById('main');
 				roomName = data['url'];
 				currentTime = data['timer'];
 				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 				chatSocket.onclose = socketClose;
 				chatSocket.onmessage = processMessage;
-				$.ajax({
-					url: 'https://' + address + '/validate_username',
-					data: {
-						'username': user_id,
-						'url': roomName
-					},
-					dataType: 'json',
-					success: function (data) {
-						if (true) {
-							people_count = data['count']
-							name = data['user_id']
-						}
-					}
-				});
-				gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;
-				chatSocket.send(JSON.stringify({message: "new_user", name: name}));
+				main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
+				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 			} else {
 				alert("Incorrect code!")
 				openCodeForm();

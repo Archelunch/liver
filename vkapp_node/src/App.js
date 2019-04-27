@@ -33,7 +33,7 @@ class App extends Component {
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
                 <UI.Root activeView="mainView">
                     <UI.View id="mainView" activePanel={activePanel}>
-                        <MainScreen id="mainScreen" user={this.state.user} />
+                        <MainScreen id="mainScreen" />
                     </UI.View>
                 </UI.Root>
             </UI.ConfigProvider>

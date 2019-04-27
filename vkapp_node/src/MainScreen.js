@@ -14,7 +14,6 @@ class MainPanel extends Component {
                     <a href="mailto:info@handsapp.fun" target="_top" className="footer">info@handsapp.fun</a>
                 </div>
                 <h2 id="timer"></h2>
-                <span className="d-none" id="userid">{this.props.user.id}</span>
             </div>
         );
     }
