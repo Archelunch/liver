@@ -14,16 +14,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        connect.subscribe((e) => {
-            switch (e.detail.type) {
-                case 'VKWebAppGetUserInfoResult':
-                    this.setState({ user: e.detail.data });
-                    break;
-                default:
-                    console.log(e.detail.type);
-            }
-        });
-        connect.send('VKWebAppGetUserInfo', {});
+        connect.send("VKWebAppInit", {});
     }
 
     render() {
