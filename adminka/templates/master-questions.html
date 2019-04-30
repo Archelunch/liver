@@ -7,9 +7,10 @@
 		<link href='{% static "bootstrap-grid.min.css" %}' rel="stylesheet">
 	</head>
 	<body class="hands">
+		<span class="d-none" id="quizId">{{quiz.id}}</span>
 		<div class="head-overlap overlap-color-light">
 			Режим редактирования
-			<button class="back"></button>
+			<button class="back" onclick="goToAdminka();"></button>
 			<button class="download"></button>
 		</div>
 		<div class="foot-overlap overlap-color-light">
@@ -23,13 +24,13 @@
 					<div class="editor-question" id="question" onclick="changeToTextArea(this.id);">
 						<p>Впишите текст вопроса</p>
 					</div>
-					<div class="editor-answer" id="answer1" onclick="changeToTextArea(this.id, true);">
+					<div class="editor-answer" id="answer1" onclick="changeToTextArea(this.id, true);" data-correct="false">
 						<p>Вариант ответа</p>
 					</div>
-					<div class="editor-answer" id="answer2" onclick="changeToTextArea(this.id, true);">
+					<div class="editor-answer" id="answer2" onclick="changeToTextArea(this.id, true);" data-correct="false">
 						<p>Вариант ответа</p>
 					</div>
-					<div class="editor-answer" id="answer3" onclick="changeToTextArea(this.id, true);">
+					<div class="editor-answer" id="answer3" onclick="changeToTextArea(this.id, true);" data-correct="false">
 						<p>Вариант ответа</p>
 					</div>
 				</div>

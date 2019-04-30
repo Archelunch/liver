@@ -215,7 +215,7 @@ body.voter {
 	background-image: url("./trash.png");
 }
 
-.removeAnswer {
+.markAsCorrect {
 	position: absolute;
 	background-color: transparent;
 	border:none;
@@ -225,7 +225,7 @@ body.voter {
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./x.png");
+	background-image: url("./plus.png");
 }
 
 .btn-round {
