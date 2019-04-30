@@ -24,5 +24,23 @@ function changeToPrompt(elementId) {
 
 function addTest() {
 	let element = document.getElementsByClassName("row")[0];
-	element.innerHTML = '<div class="col-6"><div class="dummy"></div><div class="c c-test m-3"><button class="delete-btn"></button><textarea>Текст</textarea></div></div>' + element.innerHTML;
+	let html = `<div style="height: 100vh; width: 100vw;">
+		<div class="center">
+			<div class="input-holder"><input type="text" id="nameInput" name="nameInput" placeholder="Название" required/><button type="button" id="testButton"></button></div>
+		</div>
+	</div>`;
+	document.body.innerHTML += html;
+	document.getElementById("testButton").addEventListener('click', addTestModule);
+}
+
+function addTestModule() {
+	$.ajax("/createQuiz", {
+		type: "GET",
+		data: {
+			title: document.getElementById("testButton").value;
+		},
+		success: (data) => {
+			window.location.href = `/adminka/${data.id}`;
+		}
+	})
 }
