@@ -172,7 +172,7 @@ function openWaitingScreen() {
 	});	
 
  	gamezone =document.getElementById('gamezone');	
-	gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;	
+	gamezone.innerHTML = `<div style="height: 15vh%; width: 100vw;"></div><h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${people_count} человек</p>`;	
 	chatSocket.send(JSON.stringify({message: "new_user", name: name}));	
 };
 
