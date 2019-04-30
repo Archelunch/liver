@@ -11,3 +11,5 @@ def login(request):
 
 
 def quiz_list(request):
+    quizes = Quiz.objects.all()
+    return render(request, "master-test.html")

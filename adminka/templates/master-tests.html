@@ -14,7 +14,7 @@
 				{% for quiz in quizes %}
 				<div class="col-6">
 					<div class="dummy"></div>
-					<div class="c c-test m-3" onclick="window.location.href='{{quiz.url}}';">
+					<div class="c c-test m-3" onclick="window.location.href='/adminka/{{quiz.id}}';">
 						<button class="delete-btn"></button>
 						<textarea>{{quiz.title}}</textarea>
 					</div>
@@ -23,7 +23,7 @@
 				<div class="col-6" onclick="addTest();">
 					<div class="dummy"></div>
 					<div class="c c-add m-3">
-						<p>Создать новый опрос</p>
+						<p>Создать новую викторину</p>
 					</div>
 				</div>
 			</div>
