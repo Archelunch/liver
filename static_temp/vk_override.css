@@ -1,0 +1,7 @@
+.editor-question p, .editor-answer p, .head-overlap, .c p, .footer, .btn, .input-holder input, .header, .editor-header, .simple-text, .row_ div, .register_btn, textarea, #timer, .backbtn {
+    font-family: "TT Commons", sans-serif !important;
+}
+
+body.hands, body.hands_simple {
+    background-image: url("/bg-vk.png") !important;
+}
