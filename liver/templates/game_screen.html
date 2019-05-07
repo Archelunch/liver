@@ -71,8 +71,14 @@
 			let spent = 0;
 			let hiddenInterval = null;
 
+			function convertTimeToPrettyString(time) {
+				let minutes = Math.floor(time / 60);
+				let seconds = time - (minutes * 60);
+				return `${minutes}:${seconds}`;
+			}
+
 			function timer() {
-				document.getElementById("timer").innerHTML = currentTime;
+				document.getElementById("timer").innerHTML = convertTimeToPrettyString(currentTime);
 				currentTime -= 1;
 				if (currentTime === -1) {
 					clear(true);
