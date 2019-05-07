@@ -37,8 +37,14 @@ function addTest() {
 	element.innerHTML = '<div class="col-6"><div class="dummy"></div><div class="c c-test m-3"><button class="delete-btn"></button><textarea>Текст</textarea></div></div>' + element.innerHTML;
 }
 
+function convertTimeToNiceString(time) {
+	let minutes = Math.floor(time / 60);
+	let seconds = time - (minutes * 60);
+	return `${minutes}:${seconds}`;
+}
+
 function timer() {
-	document.getElementById("timer").innerHTML = currentTime;
+	document.getElementById("timer").innerHTML = convertTimeToNiceString(currentTime);
 	currentTime -= 1;
 	if (currentTime === -1) {
 		clear(true);
