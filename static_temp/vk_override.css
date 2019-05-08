@@ -3,5 +3,5 @@
 }
 
 body.hands, body.hands_simple {
-    background-image: url("/bg-vk.png") !important;
+    background-image: url("./bg-vk.png") !important;
 }
