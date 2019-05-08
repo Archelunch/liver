@@ -5,3 +5,26 @@
 body.hands, body.hands_simple {
     background-image: url("./bg-vk.png") !important;
 }
+
+.header-vk {
+	background-color: #1F0939;
+	border-radius: 3vw;
+}
+
+@media screen and (min-width: 1200px) {
+	.header-vk {
+		border-radius: 2vw;
+	}
+}
+
+.c-test, .btn-round {
+	box-shadow: 0 5px 0 0 #B28BD5;
+}
+
+.btn-main {
+	box-shadow: 0 5px 0 0 #B828BA;
+}
+
+.input-holder, .input-holder-full, .input-holder input:focus + button, .register_btn {
+	box-shadow: 0 5px 0 0 #6630A0;
+}
