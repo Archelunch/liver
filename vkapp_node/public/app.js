@@ -130,6 +130,7 @@ function processMessage(d) {
 		newHTML += "</div>";
 		stabilizer.innerHTML = newHTML;
 	} else if (data.message === 'results') {
+		document.getElementById("footemail").style.visibility = "visible";
 		newHTML = `<h2 class="header">Вы ответили правильно на ${data.correctAnswersCount} вопросов из ${data.questionCount}!</h2>
 		<div class="center">
 		<button class="btn btn2" id="resultsButton">Все результаты</button>
@@ -147,6 +148,7 @@ function processMessage(d) {
 		
 function openCodeForm() {
 	let main = document.getElementById("main");
+	document.getElementById("footemail").style.visibility = "hidden";
 	main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
 	document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 };
