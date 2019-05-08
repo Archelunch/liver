@@ -53,11 +53,11 @@
 <body class="hands">
 	<div id="gamezone">
 		<div class="center" id="main">
-			<button class="btn btn-main center" id="mainButton">HANDSAPP</button>
+			<button class="btn btn-main center" id="mainButton">ADD VK</button>
 		</div>
 	</div>
 	<div id="footemail">
-		<a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
+		<a href="https://vk.com/hands_app" target="_top" class="footer" id="footerlink">Сделано в HandsApp</a>
 	</div>
 	<h2 id="timer"></h2>
 	<script>
@@ -169,6 +169,7 @@
 						</div>`;
 						gamezone.innerHTML = newHTML;
 					document.getElementById('resultsButton').addEventListener('click', loadResults);
+					document.getElementById('footemail').style.visibility = "visible";
 				} else if (data.message === 'player_count') {
 					people_count = data.count;
 					var counter = document.getElementById("user-text");
@@ -204,6 +205,7 @@
 			};
 		
 			function openCodeForm() {
+				document.getElementById("footemail").style.visibility = "hidden";
 				main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
 				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 			};
