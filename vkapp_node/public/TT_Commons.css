@@ -1,6 +1,180 @@
 @font-face {
-    font-family: "TT Commons";
-    src: url("/TTCommonsRegular.ttf") format("ttf");
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'TT Commons';
+    src: local('TT Commons ExtraLight Italic'), local('TTCommons-ExtraLightItalic'),
+        url('./TTCommons/TTCommons-ExtraLightItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-ExtraLightItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
 }
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons DemiBold'), local('TTCommons-DemiBold'),
+        url('./TTCommons/TTCommons-DemiBold.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-DemiBold.woff') format('woff'),
+        url('./TTCommons/TTCommons-DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Black'), local('TTCommons-Black'),
+        url('./TTCommons/TTCommons-Black.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Black.woff') format('woff'),
+        url('./TTCommons/TTCommons-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons ExtraBold Italic'), local('TTCommons-ExtraBoldItalic'),
+        url('./TTCommons/TTCommons-ExtraBoldItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-ExtraBoldItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Thin Italic'), local('TTCommons-ThinItalic'),
+        url('./TTCommons/TTCommons-ThinItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-ThinItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Italic'), local('TTCommons-Italic'),
+        url('./TTCommons/TTCommons-Italic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Italic.woff') format('woff'),
+        url('./TTCommons/TTCommons-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Black Italic'), local('TTCommons-BlackItalic'),
+        url('./TTCommons/TTCommons-BlackItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-BlackItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Regular'), local('TTCommons-Regular'),
+        url('./TTCommons/TTCommons-Regular.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Regular.woff') format('woff'),
+        url('./TTCommons/TTCommons-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons DemiBold Italic'), local('TTCommons-DemiBoldItalic'),
+        url('./TTCommons/TTCommons-DemiBoldItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-DemiBoldItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-DemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Medium'), local('TTCommons-Medium'),
+        url('./TTCommons/TTCommons-Medium.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Medium.woff') format('woff'),
+        url('./TTCommons/TTCommons-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Bold Italic'), local('TTCommons-BoldItalic'),
+        url('./TTCommons/TTCommons-BoldItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-BoldItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons ExtraLight'), local('TTCommons-ExtraLight'),
+        url('./TTCommons/TTCommons-ExtraLight.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-ExtraLight.woff') format('woff'),
+        url('./TTCommons/TTCommons-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Medium Italic'), local('TTCommons-MediumItalic'),
+        url('./TTCommons/TTCommons-MediumItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-MediumItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons ExtraBold'), local('TTCommons-ExtraBold'),
+        url('./TTCommons/TTCommons-ExtraBold.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-ExtraBold.woff') format('woff'),
+        url('./TTCommons/TTCommons-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Bold'), local('TTCommons-Bold'),
+        url('./TTCommons/TTCommons-Bold.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Bold.woff') format('woff'),
+        url('./TTCommons/TTCommons-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Light Italic'), local('TTCommons-LightItalic'),
+        url('./TTCommons/TTCommons-LightItalic.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-LightItalic.woff') format('woff'),
+        url('./TTCommons/TTCommons-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Thin'), local('TTCommons-Thin'),
+        url('./TTCommons/TTCommons-Thin.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Thin.woff') format('woff'),
+        url('./TTCommons/TTCommons-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TT Commons';
+    src: local('TT Commons Light'), local('TTCommons-Light'),
+        url('./TTCommons/TTCommons-Light.woff2') format('woff2'),
+        url('./TTCommons/TTCommons-Light.woff') format('woff'),
+        url('./TTCommons/TTCommons-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
