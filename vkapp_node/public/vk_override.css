@@ -25,6 +25,6 @@ body.hands, body.hands_simple {
 	box-shadow: 0 5px 0 0 #B828BA;
 }
 
-.input-holder, .input-holder-full, .input-holder input:focus + button, .register_btn {
+.input-holder, .input-holder-full, .input-holder input:focus + button, .register_btn, .backbtn {
 	box-shadow: 0 5px 0 0 #6630A0;
 }
