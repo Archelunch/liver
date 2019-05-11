@@ -8,8 +8,8 @@ connect.subscribe((e) => {
         case 'VKWebAppGetUserInfoResult':
             console.log(e.detail.data.id);
             ReactDOM.render(
-                <span className="d-none" id="vkid">e.detail.data.id</span>
                 <div style={{width: "100vw", height: "100vh"}}>
+                    <span className="d-none" id="vkid">e.detail.data.id</span>
                     <div id="gamezone">
                         <div className="center" id="main">
                             <button className="btn btn-main center" id="mainButton">ADD VK</button>
