@@ -9,7 +9,7 @@ connect.subscribe((e) => {
             console.log(e.detail.data.id);
             ReactDOM.render(
                 <div style={{width: "100vw", height: "100vh"}}>
-                    <span style={{display: "none"}} id="vkid">{{e.detail.data.id}}</span>
+                    <span style={{display: "none"}} id="vkid">{e.detail.data.id}</span>
                     <div id="gamezone">
                         <div className="center" id="main">
                             <button className="btn btn-main center" id="mainButton">ADD VK</button>
