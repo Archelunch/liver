@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import connect from '@vkontakte/vkui-connect';
 
 connect.send('VKWebAppInit', {});
+connect.subscribe((e) => {
+    switch (e.detail.type) {
+        case 'VKWebAppGetUserInfoResult':
+            console.log(e.detail.data);
+            break;
+        default:
+            console.log(e.detail.type);
+    }
+});
+connect.send('VKWebAppGetUserInfo', {});
 
 ReactDOM.render(
     <div style={{width: "100vw", height: "100vh"}}>
