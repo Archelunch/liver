@@ -697,7 +697,6 @@ textarea {
 #timer {
 	position: absolute;
     top: 0;
-    padding-right: 50px;
     font-size: 5vw;
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;

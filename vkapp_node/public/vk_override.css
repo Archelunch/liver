@@ -53,3 +53,8 @@ body.hands, body.hands_simple {
 .footer {
 	font-size: 3vw;
 }
+
+.btn.result-bar-outer span {
+	line-height: 16vw;
+	vertical-align: middle;
+}
