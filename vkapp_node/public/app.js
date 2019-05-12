@@ -149,8 +149,10 @@ function processMessage(d) {
 function openCodeForm() {
 	let main = document.getElementById("main");
 	document.getElementById("footemail").style.visibility = "hidden";
-	main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
-	document.getElementById('codeFormButton').addEventListener('click', openNameForm);
+	//main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
+	//document.getElementById('codeFormButton').addEventListener('click', openNameForm);
+	openNameForm();
+
 };
 
 function socketClose(e) {
@@ -185,7 +187,7 @@ function openWaitingScreen() {
 };
 
 function openNameForm() {
-	code = document.getElementById('codeInput').value;
+	code = "1605";
 	$.ajax({
 		url: 'https://'+ address + '/validate_code',
 		data: {
