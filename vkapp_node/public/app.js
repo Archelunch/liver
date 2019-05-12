@@ -200,9 +200,9 @@ function openNameForm() {
 				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 				chatSocket.onclose = socketClose;
 				chatSocket.onmessage = processMessage;
+				chatSocket.onopen = openWaitingScreen;
 				// main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
 				// document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
-				openWaitingScreen();
 			} else {
 				alert("Incorrect code!")
 				openCodeForm();
