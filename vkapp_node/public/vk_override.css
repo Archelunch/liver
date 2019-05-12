@@ -34,7 +34,6 @@ body.hands, body.hands_simple {
 
 .backbtn {
 	top: 95%;
-    display: block;
     width: 30vw;
     height: 8vw;
     left: 20%;
@@ -57,4 +56,8 @@ body.hands, body.hands_simple {
 .btn.result-bar-outer span {
 	line-height: 16vw;
 	vertical-align: middle;
+}
+
+.questionheader {
+    font-size: 20px;
 }

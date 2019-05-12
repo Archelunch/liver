@@ -114,7 +114,7 @@ function processMessage(d) {
 		document.getElementById("footemail").style.visibility = "hidden";
 		newHTML = `
 			<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
-			<h2 class="header">${data.questionText}</h2>
+			<h2 class="header questionheader">${data.questionText}</h2>
 			<div class="stab"><div class="bottom" id="main">`;
 		data.answers.forEach((answer, index) => {
 			newHTML += `<button class="btn btn1" onclick="this.classList.add('chosen');sendAnswer(${data.ids[index]}, ${data.question_id})"><span class="answer">${answer}</span></button>`;
