@@ -161,7 +161,7 @@ function socketClose(e) {
 }
 
 function openWaitingScreen() {	
-	name = document.getElementById('nameInput').value;	
+	name = document.getElementById('vkid').innerHTML;	
 	console.log(name)	
 	$.ajax({	
 		url: 'https://' + address + '/validate_username',	
@@ -200,8 +200,9 @@ function openNameForm() {
 				chatSocket = new WebSocket('wss://' + address + '/ws/quiz/' + roomName + '/');
 				chatSocket.onclose = socketClose;
 				chatSocket.onmessage = processMessage;
-				main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
-				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
+				// main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
+				// document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
+				openWaitingScreen();
 			} else {
 				alert("Incorrect code!")
 				openCodeForm();
