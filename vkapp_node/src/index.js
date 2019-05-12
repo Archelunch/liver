@@ -5,7 +5,7 @@ import connect from '@vkontakte/vkui-connect';
 connect.send('VKWebAppInit', {});
 connect.subscribe((e) => {
     if (e.detail.type === 'VKWebAppGetUserInfoResult') {
-        let full_name = `${e.detail.last_name} ${e.detail.first_name}`;
+        let full_name = `${e.detail.data.last_name} ${e.detail.data.first_name}`;
         ReactDOM.render(
             <div style={{width: "100vw", height: "100vh"}}>
                 <span style={{display: "none"}} id="vkid">{full_name}</span>
