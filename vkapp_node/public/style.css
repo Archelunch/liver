@@ -700,8 +700,6 @@ textarea {
     font-size: 5vw;
     color: #ffffff;
     font-family: 'Montserrat', sans-serif;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .backbtn {

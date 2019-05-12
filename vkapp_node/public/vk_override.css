@@ -61,3 +61,10 @@ body.hands, body.hands_simple {
 .questionheader {
     font-size: 30px;
 }
+
+#timer {
+    font-size: 30px;
+    font-weight: 600;
+    right: 8vw;
+    top: 1.5vw;
+}
