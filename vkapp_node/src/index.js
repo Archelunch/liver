@@ -7,9 +7,10 @@ connect.subscribe((e) => {
     switch (e.detail.type) {
         case 'VKWebAppGetUserInfoResult':
             console.log(e.detail.data.id);
+            let full_name = `${e.detail.last_name} ${e.detail.first_name}`;
             ReactDOM.render(
                 <div style={{width: "100vw", height: "100vh"}}>
-                    <span style={{display: "none"}} id="vkid">{e.detail.data.id}</span>
+                    <span style={{display: "none"}} id="vkid">{full_name}</span>
                     <div id="gamezone">
                         <div className="center" id="main">
                             <button className="btn btn-main center" id="mainButton">ADD VK</button>
