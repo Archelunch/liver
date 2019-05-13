@@ -52,11 +52,11 @@
     <body class="hands">
         <div id="gamezone">
             <div class="center" id="main">
-                <button class="btn btn-main center" id="mainButton">HANDSAPP</button>
+                <button class="btn btn-main center" id="mainButton">VK ADD</button>
             </div>
         </div>
         <div id="footemail">
-            <a href="mailto:info@handsapp.fun" target="_top" class="footer">info@handsapp.fun</a>
+            <a href="https://vk.com/hands_app" target="_top" class="footer">Сделано в HandsApp</a>
         </div>
         <h2 id="timer"></h2>
     </body>
@@ -153,6 +153,7 @@
         }
     
         function openWaitingScreen() {
+            let code = "1605";
             $.ajax({
                 url: '/validate_code',
                 data: {
@@ -171,8 +172,9 @@
 				};
     
         function openCodeForm() {
-            main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
-            document.getElementById('codeFormButton').addEventListener('click', openWaitingScreen);
+            //main.innerHTML = '<div class="input-holder"><input type="text" id="codeInput" placeholder="Введите код" /><button type="button" id="codeFormButton"></button></div>';
+            //document.getElementById('codeFormButton').addEventListener('click', openWaitingScreen);
+            openWaitingScreen();
         };
     
         document.getElementById('mainButton').addEventListener('click', openCodeForm);
