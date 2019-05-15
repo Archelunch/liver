@@ -59,7 +59,10 @@ body.hands, body.hands_simple {
 }
 
 .questionheader {
-    font-size: 50px;
+    font-size: 60px;
+    width: 60vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 #timer {
