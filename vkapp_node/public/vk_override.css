@@ -7,7 +7,6 @@ body.hands, body.hands_simple {
 }
 
 .header-vk {
-	background-color: rgba(31,9,57,0.5);
     text-align: center;
     font-size: 30px;
     line-height: 50px;
@@ -65,6 +64,7 @@ body.hands, body.hands_simple {
 #timer {
     font-size: 30px;
     font-weight: 600;
-    right: 8vw;
-    top: 1.5vw;
+	top: 1.5vw;
+	left: 50%;
+	transform: translateX(-50%);
 }
