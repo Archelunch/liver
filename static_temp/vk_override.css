@@ -60,7 +60,7 @@ body.hands, body.hands_simple {
 }
 
 .questionheader {
-    font-size: 60px;
+    font-size: 50px;
     width: 60vw;
     margin-left: 50%;
     transform: translateX(-50%);
