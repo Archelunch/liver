@@ -210,11 +210,13 @@
 				document.getElementById('codeFormButton').addEventListener('click', openNameForm);
 			};
 
-			function socketClose(e) {
-				console.error('Game socket closed unexpectedly');
+			function connectGame() {
 				chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
 				chatSocket.onmessage = processMessage;
-				chatSocket.onclose = socketClose;
+				chatSocket.onclose = function(event){
+						console.log(event);
+						setTimeout(connectGame, 1000); 
+				}
 			}
 		
 			function openNameForm() {
@@ -229,9 +231,7 @@
 					if (data['resp']==200 && code != '') {
 						roomName = data['url'];
 						currentTime = data['timer'];
-						chatSocket = new WebSocket('wss://' + window.location.host + '/ws/quiz/' + roomName + '/');
-						chatSocket.onclose = socketClose;
-						chatSocket.onmessage = processMessage;
+						connectGame();
 						main.innerHTML = '<div class="input-holder"><input type="text" id="nameInput" placeholder="Представьтесь" /><button type="button" id="nameFormButton"></button></div>';
 				document.getElementById('nameFormButton').addEventListener('click', openWaitingScreen);
 					}
