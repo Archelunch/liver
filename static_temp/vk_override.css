@@ -2,9 +2,9 @@
     font-family: "TT Commons", sans-serif !important;
 }
 
-body.hands, body.hands_simple {
+/* body.hands, body.hands_simple {
     background-image: url("./bg-vk.png") !important;
-}
+} */
 
 .header-vk {
 	background-color: rgba(31,9,57,0.5);
