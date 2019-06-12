@@ -36,7 +36,7 @@ body.voter {
 }
 
 .editor-question p {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	position: absolute;
 	color: #ffffff;
@@ -46,7 +46,7 @@ body.voter {
 }
 
 .editor-answer p {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	color: #ffffff;
 	font-size: 30px;
@@ -77,7 +77,7 @@ body.voter {
 	text-align: center;
 	line-height: 5vh;
 	font-size: 2vh;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 }
 
@@ -131,7 +131,7 @@ body.voter {
 }
 
 .c p {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	position: absolute;
 }
@@ -264,7 +264,7 @@ body.voter {
 	top: 95%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	font-size: 2vw;
 	color: white;
@@ -287,7 +287,7 @@ body.voter {
 	height: 16vw;
 	border-radius: 8vw;
 	border: none;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 500;
 	font-size: 4vw;
 	margin-top: 20px;
@@ -385,7 +385,7 @@ body.voter {
 	width: 54vw;
 	font-size: 4vw;
 	padding-left: 6vw;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 500;
 }
 
@@ -469,7 +469,7 @@ body.voter {
 
 .header {
 	display:block;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 800;
 	font-size: 40px;
 	color: white;
@@ -478,14 +478,14 @@ body.voter {
 }
 
 .editor-header {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 800;
 	font-size: 6vw;
 	color: #ffffff;
 }
 
 .simple-text {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	font-size: 30px;
 	color: white;
@@ -526,7 +526,7 @@ body.voter {
 	height: 10vw;
 	line-height: 10vw;
 	color: #ffffff;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 600;
 	font-size: 4vw;
 }
@@ -555,7 +555,7 @@ body.voter {
 	display: block;
 	border-radius: 5vw;
 	border: none;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 500;
 	font-size: 4vw;
 	line-height: 10vw;
@@ -582,7 +582,7 @@ textarea {
 	width: 70%;
 	height: 70%;
 	transform: translate(-50%, -50%);
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'TT Commons', sans-serif;
 	font-weight: 500;
 	font-size: 3vw;
 	color: #ffffff;
@@ -697,11 +697,12 @@ textarea {
 #timer {
 	position: absolute;
     top: 0;
-    font-size: 5vw;
-    color: #ffffff;
-	font-family: 'Montserrat', sans-serif;
+	font-family: "TT Commons", sans-serif;
+	font-weight: 600;
+	font-size: 30px;
+	color: white;
 	left: 70%;
-	transform: translateX(-90%);
+	transform: translateX(-99%);
 }
 
 .backbtn {
@@ -711,7 +712,7 @@ textarea {
 	transform: translate(-50%, -50%);
     background-color: #9045E1;
     box-shadow: 0 10px 0 0 #6630A0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'TT Commons', sans-serif;
     color: #ffffff;
     width: 40vw;
     height: 10vw;
