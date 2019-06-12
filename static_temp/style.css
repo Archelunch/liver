@@ -10,11 +10,11 @@ body {
 }
 
 body.hands {
-	background-image: url("./bg-simple.svg");
+	background-image: url("/bg-simple.svg");
 }
 
 body.hands_simple {
-	background-image: url("./bg-simple.svg");
+	background-image: url("/bg-simple.svg");
 }
 
 body.voter {
@@ -25,7 +25,7 @@ body.voter {
 	position: relative;
 	border-radius: 3vw;
 	border: #ffffff solid 5px;
-	background-image: url("./plus.png");
+	background-image: url("/plus.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10%;
@@ -60,7 +60,7 @@ body.voter {
 	position: relative;
 	border-radius: 1vw;
 	border: #ffffff solid 5px;
-	background-image: url("./plus.png");
+	background-image: url("/plus.png");
 	background-repeat: no-repeat;
 	background-position: 5vw center;
 	background-size: 8%;
@@ -139,7 +139,7 @@ body.voter {
 .c-add {
 	border-radius: 5%;
 	border: #ffffff solid 5px;
-	background-image: url("./plus.png");
+	background-image: url("/plus.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10%;
@@ -166,7 +166,7 @@ body.voter {
 	position: absolute;
 	background-color: transparent;
 	border: none;
-	background-image: url("./arrow_violet.png");
+	background-image: url("/arrow_violet.png");
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -186,7 +186,7 @@ body.voter {
 	background-size: 200%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./download.png");
+	background-image: url("/download.png");
 }
 
 .eye {
@@ -199,7 +199,7 @@ body.voter {
 	background-size: 150%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./eye.png");
+	background-image: url("/eye.png");
 }
 
 .trash {
@@ -212,10 +212,10 @@ body.voter {
 	background-size: 150%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./trash.png");
+	background-image: url("/trash.png");
 }
 
-.markAsCorrect {
+.removeAnswer {
 	position: absolute;
 	background-color: transparent;
 	border:none;
@@ -225,7 +225,7 @@ body.voter {
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./plus.png");
+	background-image: url("/x.png");
 }
 
 .btn-round {
@@ -241,14 +241,14 @@ body.voter {
 	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-image: url("./plus_violet.png");
+	background-image: url("/plus_violet.png");
 	box-shadow: 0 10px 0 0 #B28BD5;
 }
 
 .delete-btn {
 	height: 20%;
 	width: 20%;
-	background-image: url("./trash.png");
+	background-image: url("/trash.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -276,7 +276,7 @@ body.voter {
 
 .bottom {
 	position: absolute;
-	bottom: 20%;
+	bottom: 10%;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -317,7 +317,7 @@ body.voter {
 
 .btn2 {
 	background-color: #9045E1;
-	background-image: url("./arrow_white.png");
+	background-image: url("/arrow_white.png");
 	background-position: right 4vw center;
 	background-repeat: no-repeat;
 	background-size: auto 35%;
@@ -399,7 +399,7 @@ body.voter {
 }
 
 .input-holder button {
-	background-image: url("./arrow_violet.png");
+	background-image: url("/arrow_violet.png");
 	background-size: 60%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -471,11 +471,10 @@ body.voter {
 	display:block;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
-	font-size: 6vw;
+	font-size: 40px;
 	color: white;
 	margin: 8vw;
 	margin-bottom: 10px;
-	line-height: 6vw;
 }
 
 .editor-header {
@@ -488,7 +487,7 @@ body.voter {
 .simple-text {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
-	font-size: 4vw;
+	font-size: 30px;
 	color: white;
 	margin: 8vw;
 }
@@ -537,10 +536,12 @@ body.voter {
 }
 
 .name {
-	width: 63vw;
+	width: 60vw;
 }
 
 .score {
+	position: relative;
+	right: 0;
 	width: 8vw;
 	text-align: center;
 }
@@ -562,7 +563,7 @@ body.voter {
 	width: 35vw;
 	height: 10vw;
 	background-color: #9045E1;
-	background-image: url("./arrow_white.png");
+	background-image: url("/arrow_white.png");
 	background-position: right 4vw center;
 	background-repeat: no-repeat;
 	background-size: auto 35%;
@@ -632,12 +633,14 @@ textarea {
 		margin: 0;
 		padding: 2vw 8vw;
 		margin-bottom: 10px;
+		text-align: center;
 	}
 
 	.simple-text {
 		font-size: 3vw;
 		margin: 0;
 		padding: 1vw 8vw;
+		text-align: center;
 	}
 
 	.bottom {
@@ -693,9 +696,25 @@ textarea {
 
 #timer {
 	position: absolute;
-	top: 0;
-	right: 0;
-	padding-right: 50px;
-	font-size: 50px;
-	color: #ffffff;
+    top: 0;
+    font-size: 5vw;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.backbtn {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    background-color: #9045E1;
+    box-shadow: 0 10px 0 0 #6630A0;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    width: 40vw;
+    height: 10vw;
+    font-size: 3vw;
+    border: none;
+	border-radius: 5vw;
+	display: none;
 }

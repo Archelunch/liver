@@ -7,7 +7,6 @@ body.hands, body.hands_simple {
 }
 
 .header-vk {
-	background-color: rgba(31,9,57,0.5);
     text-align: center;
     font-size: 30px;
     line-height: 50px;
@@ -50,30 +49,22 @@ body.hands, body.hands_simple {
 }
 
 .footer {
-    font-size: 1vw;
-    font-style: normal;
+	font-size: 3vw;
 }
 
 .btn.result-bar-outer span {
-	line-height: 6vw;
+	line-height: 16vw;
 	vertical-align: middle;
 }
 
 .questionheader {
-    font-size: 50px;
-    width: 60vw;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    font-size: 25px;
 }
 
 #timer {
-    font-size: 3vw;
+    font-size: 30px;
     font-weight: 600;
-    right: 8vw;
-    top: -1.5vw;
-}
-
-body {
-    background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: darken;
+	top: 1.5vw;
+	left: 50%;
+	transform: translateX(-50%);
 }
