@@ -68,8 +68,10 @@ body.hands, body.hands_simple {
     font-size: 25px;
 }
 
-#timer {
-    font-size: 6vw;
-    font-weight: 600;
-	top: 2.8vw;
+@media screen and (max-width: 1199px) {
+    #timer {
+        font-size: 6vw;
+        font-weight: 600;
+	    top: 2.8vw;
+    }
 }
