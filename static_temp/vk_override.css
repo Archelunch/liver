@@ -16,7 +16,14 @@ body.hands, body.hands_simple {
 @media screen and (min-width: 1200px) {
 	.header-vk {
 		border-radius: 2vw;
-	}
+    }
+    
+    #timer {
+        font-size: 3vw;
+        font-weight: 600;
+        top: 1vw;
+        margin: 0;
+    }
 }
 
 .c-test, .btn-round {
@@ -62,9 +69,7 @@ body.hands, body.hands_simple {
 }
 
 #timer {
-    font-size: 30px;
+    font-size: 6vw;
     font-weight: 600;
-	top: 1.5vw;
-	left: 50%;
-	transform: translateX(-50%);
+	top: 2.8vw;
 }

@@ -1,0 +1,13 @@
+.header {
+  line-height: 8vw;
+  display: block;
+  font-weight: 800;
+  font-size: 100px;
+  color: white;
+  margin: 8vw;
+  margin-bottom: 10px;
+}
+
+.simple-text {
+  font-size: 6vw;
+}
