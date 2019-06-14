@@ -59,11 +59,6 @@ body.hands, body.hands_simple {
 	font-size: 3vw;
 }
 
-.btn.result-bar-outer span {
-	line-height: 16vw;
-	vertical-align: middle;
-}
-
 .questionheader {
     font-size: 25px;
 }
@@ -73,5 +68,10 @@ body.hands, body.hands_simple {
         font-size: 6vw;
         font-weight: 600;
 	    top: 2.8vw;
+    }
+
+    .btn.result-bar-outer span {
+        line-height: 16vw;
+        vertical-align: middle;
     }
 }
