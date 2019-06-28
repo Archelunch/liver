@@ -102,7 +102,9 @@
 
         function openWaitingScreen() {    
             gamezone.innerHTML = `<h2 class="header">Подождите, пожалуйста, игра скоро начнется...</h2><p class="simple-text" id="user-text">С вами уже играет ${usercount} человек</p>`;
-				};
+            setTimeout(checker, 1000);
+            openWaitingScreen();
+                };
         
         document.getElementById('mainButton').addEventListener('click', openWaitingScreen);
         
