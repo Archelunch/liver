@@ -24,4 +24,5 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='/static/favicons/favicon.ico'), name='favicon'),
     #path('', include('quiz.urls')),
     path('', include('liver.urls'))
+    path('mehiko', include('banner.urls'))
 ] + staticfiles_urlpatterns()

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['handsapp.fun', '178.128.238.208', 'localhost', '127.0.0.1', '*
 
 INSTALLED_APPS = [
     "sslserver",
+    "banner",
     'channels',
     'mcq',
     'quiz',
