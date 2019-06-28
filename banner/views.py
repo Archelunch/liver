@@ -20,12 +20,12 @@ def voted(request):
             user.save()
             return redirect('mehikovoter')
         else:
-            return render(request, 'mehikovoter.html', {'user':user})
+            return render(request, 'mehikos.html', {'user':user})
     else:
         user = Voter()
         user.save()
         request.session['userID'] = str(user.id)
-        return render(request, 'mehikovoter.html', {'user':user})
+        return render(request, 'mehikos.html', {'user':user})
 
 
 def check_people(request):

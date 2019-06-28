@@ -56,9 +56,9 @@
             <form action="" method="post">
             {% csrf_token %}
             {% if user.is_against %}
-            <input type="submit" class="btn btn-main center" id="mainButton">НРАВИТСЯ</button>
+            <input type="submit" class="btn btn-main center" id="mainButton" value="НРАВИТСЯ"></button>
             {% else %}
-            <input type="submit" class="btn btn-main center" id="mainButton">НЕ НРАВИТСЯ</button>
+            <input type="submit" class="btn btn-main center" id="mainButton" value="НЕ НРАВИТСЯ"></button>
             {% endif %}
         </form>
 		</div>
