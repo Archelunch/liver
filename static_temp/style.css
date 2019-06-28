@@ -471,11 +471,10 @@ body.voter {
 	display:block;
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
-	font-size: 6vw;
+	font-size: 40px;
 	color: white;
 	margin: 8vw;
 	margin-bottom: 10px;
-	line-height: 6vw;
 }
 
 .editor-header {
@@ -646,7 +645,7 @@ textarea {
 	}
 
 	.result-bar-outer span {
-		line-height: 3vw;
+		line-height: 6vw;
 	}
 
 	.row_ {
