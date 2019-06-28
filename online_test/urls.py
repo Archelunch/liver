@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/static/favicons/favicon.ico'), name='favicon'),
     #path('', include('quiz.urls')),
-    path('mehiko', include('banner.urls')),
+    path('mehiko/', include('banner.urls')),
     path('', include('liver.urls'))
 ] + staticfiles_urlpatterns()
