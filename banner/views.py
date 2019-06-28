@@ -38,4 +38,5 @@ def check_people(request):
     data['percent'] = round(100.0 * len(users_against) / len(users), 1)
     data['right'] = 1 if data['percent'] <= 50.0 else 2
     data['started'] = game.is_started
+    print(data)
     return JsonResponse(data)
