@@ -9,7 +9,7 @@ def main_screen(request):
 
 
 def voted(request):
-    print(1)
+    print(134)
     user_id = request.session.get('userID', 'None')
     if user_id != 'None':
         user = Voter.objects.filter(id=int(user_id)).first()
