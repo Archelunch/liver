@@ -78,11 +78,11 @@
         }
     
         function checker() {
-            $.ajax({
-                url: '/check_people',
-                data: {},
-                dataType: 'json',
-                success: function (data) {
+                $.ajax({
+                    url: '/mehiko/check_people',
+                    data: {},
+                    dataType: 'json',
+                    success: function (data) {
                     usercount = data['users'];
                     useragainst = data['against'];
                     right = data['right'];
