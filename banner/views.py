@@ -9,6 +9,7 @@ def main_screen(request):
 
 
 def voted(request):
+    print(1)
     user_id = request.session.get('userID', 'None')
     if user_id != 'None':
         user = Voter.objects.filter(id=int(user_id)).first()
@@ -20,12 +21,12 @@ def voted(request):
             user.save()
             return redirect('mehvote')
         else:
-            return render(request, 'mehvote.html', {'user':user})
+            return render(request, 'mehikovoter.html', {'user':user})
     else:
         user = Voter()
         user.save()
         request.session['userID'] = str(user.id)
-        return render(request, 'mehvote.html', {'user':user})
+        return render(request, 'mehikovoter.html', {'user':user})
 
 
 def check_people(request):
