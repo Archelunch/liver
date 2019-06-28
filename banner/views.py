@@ -9,7 +9,6 @@ def main_screen(request):
 
 
 def voted(request):
-    print(134)
     user_id = request.session.get('userID', 'None')
     if user_id != 'None':
         user = Voter.objects.filter(id=int(user_id)).first()
@@ -19,7 +18,7 @@ def voted(request):
             else:
                 user.is_against = True
             user.save()
-            return redirect('mehvote')
+            return redirect('mehikovoter')
         else:
             return render(request, 'mehikovoter.html', {'user':user})
     else:
