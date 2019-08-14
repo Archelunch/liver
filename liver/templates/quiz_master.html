@@ -51,15 +51,11 @@
     <link href='{% static "style.css" %}' rel="stylesheet">
 </head>
 <body class="hands">
-    <div class="center">
-        <div class="input-holder">
-            <input type="text" id="loginInput" placeholder="Логин" style="bottom: -0.5em; width: 70vw;" />
-        </div>
-        <div class="input-holder">
-            <input type="password" id="passwordInput" placeholder="Пароль" />
-            <button type="button" id="loginFormButton" onclick="login()"></button>
-        </div>
-    </div>
+	<div id="gamezone">
+		<div class="center" id="main">
+			<button class="btn btn-main center" id="mainButton" onclick="login()">HANDSAPP</button>
+		</div>
+	</div>
 </body>
 <script>
     var roomName = {{ quiz_url_json }};
@@ -70,48 +66,68 @@
     let currentTime = {{quiz_object.question_time}};
     let timerInterval = null;
 
+    function convertTimeToPrettyString(time) {
+        let minutes = Math.floor(time / 60);
+        let seconds = time - (minutes * 60);
+        return `${minutes}:${seconds}`;
+    }
+
     function timer() {
-        document.getElementById("timer").innerHTML = currentTime;
+        document.getElementById("timer").innerHTML = convertTimeToPrettyString(currentTime);
         currentTime -= 1;
+        if (currentTime === -1) {
+            clear(true);
+        }
     }
 
     function clear() {
         document.getElementById("timer").innerHTML = "";
         clearInterval(timerInterval);
     }
+    function loadResults(d) {
+            $.ajax({
+                'url': '/leaderboard',
+                'type': 'GET',
+                'data': {
+                    'url': roomName
+                },
+                'success': (data) => {
+                    if (data.length >= 100) {
+                        document.body.innerHTML = data;
+                    }
+                }
+            });
+        }
 
     function login() {
         let login = document.getElementById("loginInput").value;
         let password = document.getElementById("passwordInput").value;
-        //<div class="center"><button class="btn btn3" id="game-start-button">НАЧАТЬ ОПРОС</button>
         chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
-            if (data.message === 'stop_quiz') {
-                document.querySelector("#question").disabled = true;
-                document.querySelector("#question-results").disabled = true;
-            }
+            if (data.message === 'question') {
+                document.getElementById('question').value = "Показать правильный";
+                document.getElementById('question').id = 'question-results';
+					newHTML = `
+						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
+						<h2 class="header">${data.questionText}</h2>
+						<div class="stab"><div class="bottom" id="main">`;
+					data.answers.forEach((answer, index) => {
+						newHTML += `<p style="font-family: 'Montserrat', sans-serif;display:block;font-weight: 600;font-size: 4vw;">* ${answer}</p>`;
+					});
+					newHTML += "</div></div>";
+					gamezone.innerHTML = newHTML;
+				} else if (data.message === 'question_results') {
+                    document.getElementById('question-results').value = "Далее";
+                    document.getElementById('question-results').id = 'question';
+				} else if (data.message === 'results') {
+                    loadResults();
+                }
         }
-        document.body.innerHTML = `<div class="center"><button class="btn btn2" id="question">Следующий вопрос</button>
-            <button class="btn btn4" id="question-results">Остановить</button>
-            <button class="btn btn2" id="user_score">Показать результаты</button></div><h2 id="timer"></h2>`;
-        document.querySelector("#question-results").classList.add("disabled");
-        document.querySelector("#user_score").classList.add("disabled");
-        document.querySelector("#question-results").disabled = true;
-        document.querySelector("#user_score").disabled = false;
-        // document.querySelector('#game-start-button').onclick = function(e) {
-        //     chatSocket.send(JSON.stringify({
-        //         'message': 'start'
-        //     }));
-            //document.querySelector("#game-start-button").classList.remove("disabled");
-            //document.querySelector("#question").classList.remove("disabled");
+        document.body.innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question">Далее</button></div><h2 id="timer"></h2>`;
         document.querySelector('#question').onclick = function(e) {
             chatSocket.send(JSON.stringify({
                 'message': 'question'
             }));
-            document.querySelector("#question").classList.add("disabled");
-            document.querySelector("#question-results").classList.remove("disabled");
-            document.querySelector("#question").disabled = true;
-            document.querySelector("#question-results").disabled = false;
             currentTime = 15;
             timerInterval = setInterval(timer, 1000);
         };
@@ -120,22 +136,11 @@
             chatSocket.send(JSON.stringify({
                 'message': 'question_results'
             }));
-            document.querySelector("#question").classList.remove("disabled");
-            document.querySelector("#question-results").classList.add("disabled");
-            document.querySelector("#question").disabled = false;
-            document.querySelector("#question-results").disabled = true;
         };
         document.querySelector('#user_score').onclick = function(e) {
             chatSocket.send(JSON.stringify({
                 'message': 'results'
             }));
-            //document.querySelector("#game-start-button").classList.add("disabled");
-            document.querySelector("#question").classList.add("disabled");
-            document.querySelector("#question-results").classList.add("disabled");
-            document.querySelector("#user_score").classList.add("disabled");
-            document.querySelector("#question").disabled = true;
-            document.querySelector("#question-results").disabled = true;
-            document.querySelector("#user_score").disabled = true;
         };
      };
     chatSocket.onclose = function(e) {

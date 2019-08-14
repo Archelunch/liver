@@ -68,10 +68,10 @@ class QuizConsumer(AsyncWebsocketConsumer):
                         "ids": [ans.id for ans in self.question.get_answers()]
                 }
             else:
-                data = {
-                    'type': 'chat_message',
-                    "message": "stop_quiz"
-                }
+                data={
+                'type': 'chat_message',
+                'message': 'results'
+            }
         elif message == 'question_results':
             all_people = sum([ans.people_count for ans in self.question.get_answers()])
             if all_people > 0:
