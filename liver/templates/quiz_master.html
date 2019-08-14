@@ -100,8 +100,6 @@
         }
 
     function login() {
-        let login = document.getElementById("loginInput").value;
-        let password = document.getElementById("passwordInput").value;
         chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
