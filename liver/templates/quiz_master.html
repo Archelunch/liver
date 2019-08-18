@@ -103,8 +103,6 @@
         chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
-                document.getElementById('question').value = "Показать правильный";
-                document.getElementById('question').id = 'question-results';
 					newHTML = `
 						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
 						<h2 class="header">${data.questionText}</h2>
@@ -115,14 +113,14 @@
 					newHTML += "</div></div>";
 					gamezone.innerHTML = newHTML;
 				} else if (data.message === 'question_results') {
-                    document.getElementById('question-results').value = "Далее";
-                    document.getElementById('question-results').id = 'question';
 				} else if (data.message === 'results') {
                     loadResults();
                 }
         }
         document.body.innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question">Далее</button></div><h2 id="timer"></h2>`;
         document.querySelector('#question').onclick = function(e) {
+            document.getElementById('question').value = "Показать правильный";
+            document.getElementById('question').id = 'question-results';
             chatSocket.send(JSON.stringify({
                 'message': 'question'
             }));
@@ -131,6 +129,8 @@
         };
         document.querySelector('#question-results').onclick = function(e) {
             clear();
+            document.getElementById('question-results').value = "Далее";
+            document.getElementById('question-results').id = 'question';
             chatSocket.send(JSON.stringify({
                 'message': 'question_results'
             }));
