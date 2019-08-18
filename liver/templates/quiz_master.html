@@ -61,7 +61,6 @@
 </body>
 <script>
     var roomName = {{ quiz_url_json }};
-    let gamezone = document.getElementById('gamezone');
     var chatSocket = new WebSocket(
         'wss://' + window.location.host +
         '/ws/quiz/' + roomName + '/');
@@ -126,6 +125,7 @@
      chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
+                let gamezone = document.getElementById('gamezone');
 					newHTML = `
 						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
 						<h2 class="header">${data.questionText}</h2>
