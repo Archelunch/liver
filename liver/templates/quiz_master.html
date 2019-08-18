@@ -121,7 +121,9 @@
     }
 
     function login() {
-        chatSocket.onmessage = function processMessage(d) {
+        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
+     };
+     chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
 					newHTML = `
@@ -133,12 +135,11 @@
 					});
 					newHTML += "</div></div>";
 					gamezone.innerHTML = newHTML;
+                    console.log(gamezone);
 				}else if (data.message === 'results') {
                     loadResults();
                 }
         }
-        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
-     };
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');
     };
