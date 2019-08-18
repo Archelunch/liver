@@ -101,6 +101,25 @@
             });
         }
 
+    function question(event) {
+        document.getElementById('question').innerHTML = "Показать правильный";
+        document.getElementById('question').onclick = question_results;
+        document.getElementById('question').id = 'question-results';
+        chatSocket.send(JSON.stringify({
+            'message': 'question'
+        }));
+        currentTime = 15;
+        timerInterval = setInterval(timer, 1000);
+    }
+
+    function question_results(event) {
+        clear();
+        document.getElementById('question-results').innerHTML = "Далее";
+        document.getElementById('question-results').onclick = question;
+        document.getElementById('question-results').id = 'question';
+        chatSocket.send(JSON.stringify({'message': 'question_results'}));
+    }
+
     function login() {
         chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
@@ -118,29 +137,7 @@
                     loadResults();
                 }
         }
-        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question">Далее</button></div><h2 id="timer"></h2>`;
-        document.querySelector('#question').onclick = function(e) {
-            document.getElementById('question').innerHTML = "Показать правильный";
-            document.getElementById('question').id = 'question-results';
-            chatSocket.send(JSON.stringify({
-                'message': 'question'
-            }));
-            currentTime = 15;
-            timerInterval = setInterval(timer, 1000);
-        };
-        document.querySelector('#question-results').onclick = function(e) {
-            clear();
-            document.getElementById('question-results').innerHTML = "Далее";
-            document.getElementById('question-results').id = 'question';
-            chatSocket.send(JSON.stringify({
-                'message': 'question_results'
-            }));
-        };
-        document.querySelector('#user_score').onclick = function(e) {
-            chatSocket.send(JSON.stringify({
-                'message': 'results'
-            }));
-        };
+        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
      };
     chatSocket.onclose = function(e) {
         console.error('Game socket closed unexpectedly');
