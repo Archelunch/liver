@@ -51,15 +51,17 @@
     <link href='{% static "style.css" %}' rel="stylesheet">
 </head>
 <body class="hands">
+    <div id="masterzone">
 	<div id="gamezone">
 		<div class="center" id="main">
 			<button class="btn btn-main center" id="mainButton" onclick="login()">HANDSAPP</button>
 		</div>
-	</div>
+    </div>
+</div>
 </body>
 <script>
     var roomName = {{ quiz_url_json }};
-
+    let gamezone = document.getElementById('gamezone');
     var chatSocket = new WebSocket(
         'wss://' + window.location.host +
         '/ws/quiz/' + roomName + '/');
@@ -93,7 +95,7 @@
                 },
                 'success': (data) => {
                     if (data.length >= 100) {
-                        document.body.innerHTML = data;
+                        document.getElementById('masterzone').innerHTML = data;
                     }
                 }
             });
@@ -112,14 +114,13 @@
 					});
 					newHTML += "</div></div>";
 					gamezone.innerHTML = newHTML;
-				} else if (data.message === 'question_results') {
-				} else if (data.message === 'results') {
+				}else if (data.message === 'results') {
                     loadResults();
                 }
         }
-        document.body.innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question">Далее</button></div><h2 id="timer"></h2>`;
+        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question">Далее</button></div><h2 id="timer"></h2>`;
         document.querySelector('#question').onclick = function(e) {
-            document.getElementById('question').value = "Показать правильный";
+            document.getElementById('question').innerHTML = "Показать правильный";
             document.getElementById('question').id = 'question-results';
             chatSocket.send(JSON.stringify({
                 'message': 'question'
@@ -129,7 +130,7 @@
         };
         document.querySelector('#question-results').onclick = function(e) {
             clear();
-            document.getElementById('question-results').value = "Далее";
+            document.getElementById('question-results').innerHTML = "Далее";
             document.getElementById('question-results').id = 'question';
             chatSocket.send(JSON.stringify({
                 'message': 'question_results'
@@ -145,6 +146,5 @@
         console.error('Game socket closed unexpectedly');
     };
 
-    login();
 </script>
 </html>
