@@ -8,8 +8,8 @@
 		<link href='{% static "bootstrap-grid.min.css" %}' rel="stylesheet">
 	</head>
 	<body class="hands">
-		<button class="btn btn-main center-h mt" disabled>HANDSAPP</button>
 		<form action="" method="POST" id="loginform">
+				{% csrf_token %}
 		<div class="center">
 			<div class="input-holder input-holder-full"><input type="text" id="loginInput" name="loginInput" placeholder="Логин" required/></div>
 			<div class="input-holder"><input type="password" id="passwordInput" name="passwordInput" placeholder="Пароль" required/><button type="button" id="nameFormButton" onclick="document.getElementById('loginform').submit();"></button></div>
