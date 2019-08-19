@@ -13,6 +13,6 @@ def login(request):
 def quiz_list(request):
     if request.session['login'] == "mehadmin":
         quizes = Quiz.objects.all()
-        return render(request, "master-tests.html", {'quizrs':quizes})
+        return render(request, "master-tests.html", {'quizes':quizes})
     else:
         return redirect('admin_login')
