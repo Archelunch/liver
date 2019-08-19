@@ -120,8 +120,8 @@
     }
 
     function login() {
-        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
-     };
+        document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center" style="top: 80%;"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
+     };√
      chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
@@ -129,14 +129,16 @@
 					newHTML = `
 						<p class="simple-text">${data.questionNumber} / ${data.questionCount}</p>
 						<h2 class="header">${data.questionText}</h2>
-						<div class="stab"><div class="bottom" id="main">`;
+						<div class="stab"><div class="bottom" id="main" style="color: white; bottom: 50%; left: 30%;>`;
 					data.answers.forEach((answer, index) => {
 						newHTML += `<p style="font-family: 'Montserrat', sans-serif;display:block;font-weight: 600;font-size: 4vw;">* ${answer}</p>`;
 					});
 					newHTML += "</div></div>";
 					gamezone.innerHTML = newHTML;
                     console.log(gamezone);
-				}else if (data.message === 'results') {
+				}else if(data.message === ""){
+
+                }else if (data.message === 'results') {
                     loadResults();
                 }
         }
