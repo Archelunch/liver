@@ -25,5 +25,7 @@ urlpatterns = [
     #path('', include('quiz.urls')),
     path('mehiko/', include('banner.urls')),
     path('mehiko', include('banner.urls')),
+    path('adminka', include('adminka.urls')),
+    path('adminka/', include('adminka.urls')),
     path('', include('liver.urls'))
 ] + staticfiles_urlpatterns()
