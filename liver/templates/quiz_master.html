@@ -121,7 +121,7 @@
 
     function login() {
         document.getElementById('masterzone').innerHTML = `<div id="gamezone"></div><div class="center" style="top: 80%;"><button class="btn btn2" id="question" onclick="question()">Далее</button></div><h2 id="timer"></h2>`;
-     };√
+     };
      chatSocket.onmessage = function processMessage(d) {
             let data = JSON.parse(d.data);
             if (data.message === 'question') {
